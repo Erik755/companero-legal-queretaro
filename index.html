@@ -1,0 +1,2803 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="showroom">
+  <meta name="description" content="Compañero Legal interactivo del Código Penal para el Estado de Querétaro. Consulta artículos, penas, reformas 2022-2026 y criterios del sistema penal acusatorio y oral.">
+  <title>Compañero Legal · Código Penal para el Estado de Querétaro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Showroom) */
+      --background: #fbfbfd;
+      --surface-container-low: #f5f5f7;
+      --surface-container: #e8e8ed;
+      --surface-container-high: #dcdce1;
+      --surface-elevated: #ffffff;
+
+      /* Ink */
+      --on-surface: #1d1d1f;
+      --on-surface-variant: #6e6e73;
+
+      /* Rules */
+      --outline: #d2d2d7;
+      --outline-variant: #e5e5ea;
+
+      /* Accents */
+      --primary: #006bd6;
+      --primary-hover: #0058b0;
+      --on-primary: #ffffff;
+      --primary-container: #e8f1fd;
+      --on-primary-container: #0058b0;
+      --secondary: #bf4800;
+      --secondary-container: #fff2eb;
+      --tertiary: #1d1d1f;
+      --error: #d70015;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #248a3d;
+      --positive-container: #eaf6ed;
+      --warning: #b25000;
+      --warning-container: #fff4e5;
+      --focus: #006bd6;
+
+      /* Data series */
+      --data-1: #006bd6;
+      --data-2: #bf4800;
+      --data-3: #248a3d;
+      --data-4: #8944ab;
+      --data-context: #aeaeb2;
+
+      /* Fonts */
+      --font-headline: 'Inter Tight', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-label: 'Inter', sans-serif;
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.5rem, 1.4rem + 4.2vw, 4.5rem);
+      --headline-size: clamp(1.875rem, 1.25rem + 2.1vw, 2.75rem);
+      --subhead-size: clamp(1.1875rem, 1.05rem + 0.55vw, 1.4375rem);
+      --body-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+      --figure-size: clamp(2.25rem, 1.5rem + 2.5vw, 3.25rem);
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 5.5rem;
+
+      /* Shape */
+      --rounded: 9999px;
+      --rounded-md: 0.75rem;
+      --rounded-lg: 1.25rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --headline-tracking: -0.035em;
+      --subhead-tracking: -0.02em;
+      --figure-tracking: -0.03em;
+      --tile-shadow-hover: 0 8px 28px rgb(0 0 0 / 0.08);
+      --widget-shadow: 0 18px 48px rgb(0 0 0 / 0.18);
+      --fab-shadow: 0 10px 28px rgb(0 107 214 / 0.28);
+      --fab-shadow-hover: 0 14px 34px rgb(0 107 214 / 0.38);
+      --focus-ring: 0 0 0 3px rgb(0 107 214 / 0.28);
+      --chevron: " \203A";
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-inline: var(--space-lg);
+    }
+    .container * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Top Bar */
+    .site-header {
+      background: var(--background);
+      border-bottom: 1px solid var(--outline-variant);
+      padding-block: var(--space-md);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+      color: var(--on-surface);
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--rounded-md);
+      background: var(--tertiary);
+      color: var(--background);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding-block: var(--space-xs);
+      transition: color var(--dur-micro) var(--ease-out);
+    }
+    .nav-link:hover {
+      color: var(--on-surface);
+      text-decoration: underline;
+    }
+
+    /* Buttons & Actions */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      background: var(--primary);
+      color: var(--on-primary);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: 0.9375rem;
+      line-height: 1;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border: 0;
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out);
+    }
+    .btn-secondary:hover { background: var(--surface-container-high); }
+
+    .link-more {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--primary);
+      font-weight: 500;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      padding: var(--space-xs) var(--space-sm);
+      transition: color var(--dur-micro) var(--ease-out);
+    }
+    .link-more::after { content: var(--chevron); }
+    .link-more:hover { text-decoration: underline; }
+
+    /* Bands */
+    .band {
+      padding-block: var(--space-2xl);
+      background: var(--background);
+    }
+    .band.alt {
+      background: var(--surface-container-low);
+    }
+    .band.alt .tile {
+      background: var(--background);
+    }
+
+    /* Headline Stack */
+    .headline-stack {
+      text-align: center;
+      padding-block: var(--space-lg) var(--space-xl);
+    }
+    .headline-stack.hero-stack {
+      padding-block: var(--space-2xl) var(--space-xl);
+    }
+    .eyebrow {
+      display: inline-block;
+      color: var(--secondary);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-sm);
+    }
+    .headline-stack h1 {
+      margin: 0 auto;
+      max-width: 18ch;
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 700;
+      letter-spacing: var(--headline-tracking);
+      line-height: 1.05;
+      color: var(--on-surface);
+    }
+    .headline-stack h2 {
+      margin: 0 auto;
+      max-width: 24ch;
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+      line-height: 1.08;
+      color: var(--on-surface);
+    }
+    .headline-stack .lede {
+      color: var(--on-surface-variant);
+      font-size: var(--subhead-size);
+      line-height: 1.45;
+      max-width: 52ch;
+      margin: var(--space-md) auto 0;
+    }
+    .action-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-top: var(--space-lg);
+    }
+
+    /* Tiles */
+    .tile {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl) var(--space-lg);
+      border: 0;
+      transition: box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .tile.interactive:hover {
+      box-shadow: var(--tile-shadow-hover);
+      transform: translateY(-2px);
+    }
+    .tile.figure {
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .tile.figure .label {
+      color: var(--on-surface-variant);
+      font-size: var(--label-size);
+      font-weight: 500;
+    }
+    .tile.figure .value {
+      font-family: var(--font-headline);
+      font-size: var(--figure-size);
+      font-weight: 700;
+      letter-spacing: var(--figure-tracking);
+      line-height: 1.1;
+      color: var(--on-surface);
+      margin-block: var(--space-xs);
+      font-variant-numeric: tabular-nums;
+    }
+    .tile.figure .caption {
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      font-weight: 400;
+      max-width: 28ch;
+      margin: 0 auto;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+
+    /* Guide Steps */
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--rounded);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      margin-bottom: var(--space-md);
+      font-variant-numeric: tabular-nums;
+    }
+    .tile h3 {
+      margin: 0 0 var(--space-sm);
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      color: var(--on-surface);
+    }
+    .tile p {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      max-width: 65ch;
+    }
+
+    /* Quick Prompt Strip */
+    .prompt-strip-tile {
+      margin-top: var(--space-xl);
+      padding: var(--space-lg);
+      text-align: center;
+    }
+    .prompt-strip-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1.0625rem;
+      color: var(--on-surface);
+      margin: 0 0 var(--space-md);
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 0;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .chip:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .chip.active {
+      background: var(--tertiary);
+      color: var(--background);
+    }
+
+    /* Explorer Controls */
+    .explorer-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-md);
+      align-items: end;
+      margin-bottom: var(--space-lg);
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    .input-pill {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background: var(--surface-elevated);
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .input-pill:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: var(--focus-ring);
+    }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    .filter-pill {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      border: 0;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .filter-pill:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .filter-pill[aria-pressed="true"],
+    .filter-pill[aria-selected="true"] {
+      background: var(--tertiary);
+      color: var(--background);
+    }
+
+    /* Article Cards */
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .article-tag {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: var(--label-size);
+      font-weight: 500;
+    }
+    .article-tag.reform {
+      background: var(--secondary-container);
+      color: var(--secondary);
+    }
+    .bookmark-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded);
+      border: 0;
+      background: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .bookmark-btn:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .bookmark-btn[aria-pressed="true"] {
+      color: var(--primary);
+      background: var(--primary-container);
+    }
+    .penalty-box {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded-md);
+      background: var(--background);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-top: var(--space-xs);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-2xl) var(--space-lg);
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+    }
+
+    /* Interactive Penalty Modulator */
+    .simulator-tile {
+      margin-top: var(--space-xl);
+      padding: var(--space-xl);
+    }
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: center;
+      margin-top: var(--space-lg);
+    }
+    .segmented-track {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-xs);
+      padding: var(--space-xs);
+      background: var(--surface-container);
+      border-radius: var(--rounded-md);
+      margin-top: var(--space-sm);
+    }
+    .seg-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-sm);
+      border: 0;
+      border-radius: calc(var(--rounded-md) - 2px);
+      background: transparent;
+      color: var(--on-surface);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .seg-btn[aria-pressed="true"] {
+      background: var(--background);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .sim-result-panel {
+      background: var(--background);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      text-align: left;
+    }
+    .sim-result-value {
+      font-family: var(--font-headline);
+      font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.375rem);
+      font-weight: 700;
+      letter-spacing: var(--figure-tracking);
+      color: var(--on-surface);
+      margin-block: var(--space-xs);
+      font-variant-numeric: tabular-nums;
+    }
+    .sim-bar-track {
+      height: 10px;
+      width: 100%;
+      background: var(--surface-container);
+      border-radius: var(--rounded);
+      overflow: hidden;
+      margin-block: var(--space-md);
+    }
+    .sim-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--rounded);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+    .slider-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 90px;
+      gap: var(--space-md);
+      align-items: end;
+      margin-top: var(--space-md);
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 44px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Oral Procedure Stepper */
+    .stage-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    .stage-panel {
+      padding: var(--space-xl);
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .stage-callout {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+    }
+    .stage-list {
+      margin: var(--space-md) 0 0;
+      padding-left: var(--space-lg);
+      color: var(--on-surface-variant);
+    }
+    .stage-list li + li { margin-top: var(--space-sm); }
+
+    /* Reforms Table */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+    table.clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9375rem;
+    }
+    table.clean-table th {
+      color: var(--on-surface-variant);
+      font-weight: 500;
+      font-size: var(--label-size);
+      padding: var(--space-md) var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    table.clean-table td {
+      padding: var(--space-md) var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+      vertical-align: top;
+      font-variant-numeric: tabular-nums;
+    }
+    table.clean-table tr:last-child td { border-bottom: 0; }
+
+    /* Bookmarks Bar */
+    .saved-drawer {
+      margin-top: var(--space-lg);
+      padding: var(--space-lg);
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+    }
+    .saved-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--surface-container-low);
+      padding-block: var(--space-2xl) var(--space-3xl);
+      border-top: 1px solid var(--outline-variant);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      text-align: center;
+      align-items: center;
+    }
+    .footer-authorship {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1.0625rem;
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .footer-disclaimer {
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      max-width: 64ch;
+      margin: 0;
+    }
+    .footer-sources {
+      color: var(--on-surface-variant);
+      font-size: var(--label-size);
+      max-width: 72ch;
+      margin: 0;
+    }
+
+    /* Floating Action Widget (Chatbot) */
+    .chat-widget {
+      position: fixed;
+      right: var(--space-lg);
+      bottom: var(--space-lg);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-sm);
+    }
+    .chat-launcher-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      position: relative;
+    }
+    .chat-tooltip {
+      background: var(--tertiary);
+      color: var(--background);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      box-shadow: var(--tile-shadow-hover);
+      white-space: nowrap;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .chat-fab {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--rounded-full);
+      background: var(--primary);
+      color: var(--on-primary);
+      border: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--fab-shadow);
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+    }
+    .chat-fab:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--fab-shadow-hover);
+    }
+    .chat-fab:active { transform: scale(0.96); }
+
+    .chat-panel {
+      width: min(440px, calc(100vw - 24px));
+      height: min(630px, calc(100vh - 104px));
+      background: var(--surface-elevated);
+      border-radius: var(--rounded-lg);
+      box-shadow: var(--widget-shadow);
+      border: 1px solid var(--outline-variant);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform-origin: bottom right;
+      animation: chatPop var(--dur-short) var(--ease-out);
+    }
+    @keyframes chatPop {
+      from { opacity: 0; transform: scale(0.95) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .chat-panel.hidden {
+      display: none;
+    }
+    .chat-header {
+      background: var(--surface-container-low);
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--positive);
+      box-shadow: 0 0 0 3px rgb(36 138 61 / 0.18);
+      flex-shrink: 0;
+    }
+    .chat-header-info h3 {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+    .chat-header-info p {
+      margin: 0;
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+    .chat-header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .icon-btn {
+      min-width: 38px;
+      min-height: 38px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded);
+      border: 0;
+      background: transparent;
+      color: var(--on-surface-variant);
+      font-size: var(--label-size);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .icon-btn:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .chat-messages {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      background: var(--background);
+    }
+    .msg {
+      max-width: 91%;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded-md);
+      font-size: 0.925rem;
+      line-height: 1.55;
+      word-wrap: break-word;
+    }
+    .msg.user {
+      align-self: flex-end;
+      background: var(--primary);
+      color: var(--on-primary);
+      border-bottom-right-radius: 4px;
+    }
+    .msg.bot {
+      align-self: flex-start;
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border-bottom-left-radius: 4px;
+      border: 1px solid var(--outline-variant);
+    }
+    .msg.bot .msg-badge {
+      display: inline-block;
+      margin-bottom: 6px;
+      padding: 2px 10px;
+      border-radius: var(--rounded);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 0.725rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .msg.bot .msg-intro {
+      margin: 0 0 8px;
+      color: var(--on-surface);
+    }
+    .msg.bot .msg-criterio {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--surface-elevated);
+      border-left: 3px solid var(--primary);
+      font-size: 0.85rem;
+      color: var(--on-surface);
+    }
+    .msg.bot .msg-criterio strong {
+      color: var(--on-primary-container);
+    }
+    .msg.bot ul {
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+    .msg.bot li + li { margin-top: 5px; }
+    .msg-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .msg-suggestion-btn {
+      min-height: 32px;
+      padding: 4px 10px;
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background: var(--surface-elevated);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .msg-suggestion-btn:hover {
+      background: var(--primary-container);
+      border-color: var(--primary);
+    }
+
+    /* Typing animation */
+    .typing-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 4px;
+    }
+    .typing-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--on-surface-variant);
+      animation: typingBounce 1.2s infinite ease-in-out both;
+    }
+    .typing-dots span:nth-child(1) { animation-delay: -0.24s; }
+    .typing-dots span:nth-child(2) { animation-delay: -0.12s; }
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.45; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .chat-composer {
+      padding: var(--space-sm) var(--space-md) var(--space-md);
+      border-top: 1px solid var(--outline-variant);
+      background: var(--surface-elevated);
+    }
+    .chat-composer-label {
+      display: block;
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-xs);
+    }
+    .chat-composer-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-sm);
+      align-items: end;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--dur-long) var(--ease-out), transform var(--dur-long) var(--ease-out);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .explorer-controls { grid-template-columns: 1fr; }
+      .simulator-grid { grid-template-columns: 1fr; }
+      .stage-panel { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding-inline: var(--space-md); }
+      .band { padding-block: var(--space-xl); }
+      .chat-widget {
+        right: var(--space-sm);
+        bottom: var(--space-sm);
+      }
+      .chat-tooltip {
+        font-size: 0.8125rem;
+        padding: var(--space-xs) var(--space-sm);
+      }
+      .slider-row { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <i data-lucide="scale" width="18" height="18"></i>
+        </span>
+        <span>Compañero Legal · Querétaro</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#guia-uso" class="nav-link">Guía de uso</a>
+        <a href="#explorador" class="nav-link">Catálogo penal</a>
+        <a href="#sistema-oral" class="nav-link">Sistema oral</a>
+        <a href="#reformas" class="nav-link">Reformas</a>
+        <button type="button" class="btn-primary" onclick="openChatWidget()">
+          Abrir compañero legal
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- Hero Section -->
+    <section class="band">
+      <div class="container">
+        <div class="headline-stack hero-stack">
+          <span class="eyebrow">Código Penal para el Estado de Querétaro · Edición 2026</span>
+          <h1>Consulta penal clara, directa y fundamentada.</h1>
+          <p class="lede">
+            Explora artículos, penas, reformas recientes y criterios del sistema penal acusatorio y oral en Querétaro. Resuelve tus dudas o plantea casos prácticos con tu compañero legal interactivo.
+          </p>
+          <div class="action-row">
+            <button type="button" class="btn-primary" onclick="openChatWidget()">
+              Consultar al compañero legal
+            </button>
+            <a href="#guia-uso" class="link-more">Ver cómo usar la plataforma</a>
+          </div>
+        </div>
+
+        <div class="grid-3 reveal">
+          <div class="tile figure">
+            <div class="label">Ordenamiento base</div>
+            <div class="value">1987</div>
+            <p class="caption">Publicado el 23 de julio de 1987 y restablecido en diciembre de 2009.</p>
+          </div>
+          <div class="tile figure">
+            <div class="label">Actualización normativa</div>
+            <div class="value">93</div>
+            <p class="caption">Reformas registradas hasta el 15 de julio de 2026 en La Sombra de Arteaga.</p>
+          </div>
+          <div class="tile figure">
+            <div class="label">Unidad de multa</div>
+            <div class="value">UMA</div>
+            <p class="caption">Desindexación del salario mínimo vigente desde septiembre de 2017.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section id="guia-uso" class="band alt">
+      <div class="container">
+        <div class="headline-stack">
+          <span class="eyebrow">Guía rápida de uso</span>
+          <h2>Diseñado para responder dudas penales en tres pasos.</h2>
+          <p class="lede">
+            Esta plataforma traduce disposiciones del Código Penal de Querétaro, criterios de la Suprema Corte y estudios sobre oralidad penal en orientación accesible con criterio jurídico práctico.
+          </p>
+        </div>
+
+        <div class="grid-3 reveal">
+          <article class="tile">
+            <div class="step-number">1</div>
+            <h3>Ubica el delito o regla</h3>
+            <p>
+              Usa el catálogo interactivo para filtrar por materia (vida, patrimonio, servicio público o reformas 2022–2026) o escribe una palabra clave como <em>feminicidio</em>, <em>robo</em>, <em>fraude</em> o <em>tentativa</em>.
+            </p>
+          </article>
+          <article class="tile">
+            <div class="step-number">2</div>
+            <h3>Abre tu compañero legal</h3>
+            <p>
+              Haz clic en el botón azul flotante <strong>«Consulta a tu compañero legal»</strong> en la esquina inferior derecha. Puedes hacer preguntas directas o contarle una situación cotidiana.
+            </p>
+          </article>
+          <article class="tile">
+            <div class="step-number">3</div>
+            <h3>Dialoga con seguimiento</h3>
+            <p>
+              El asistente entiende el contexto de tu conversación: puedes preguntar <em>«¿y si fue sin querer?»</em>, <em>«¿cuánto sería en pesos?»</em> o <em>«¿qué pasa si me amenazan?»</em> y te responderá con criterio jurídico.
+            </p>
+          </article>
+        </div>
+
+        <div class="tile prompt-strip-tile reveal">
+          <p class="prompt-strip-title">Prueba una consulta o caso práctico en el compañero legal</p>
+          <div class="chip-row">
+            <button type="button" class="chip" onclick="askPresetQuestion(`¿Qué pena establece el artículo 126 Bis por feminicidio y cuándo hay razones de género?`)">
+              Pena por feminicidio (Art. 126 Bis)
+            </button>
+            <button type="button" class="chip" onclick="askPresetQuestion(`Asaltaron mi negocio en Querétaro, ¿qué pena les corresponde y cómo pido reparación del daño?`)">
+              Caso: Robo en comercio (Art. 183 Quáter)
+            </button>
+            <button type="button" class="chip" onclick="askPresetQuestion(`¿Cómo se valoran los testigos de oídas en el sistema oral según la SCJN?`)">
+              Testigos de oídas (ADR 1630/2023)
+            </button>
+            <button type="button" class="chip" onclick="askPresetQuestion(`¿Qué pasa si en un accidente de tránsito lesiono a alguien sin intención?`)">
+              Caso: Accidente culposo (Art. 75)
+            </button>
+            <button type="button" class="chip" onclick="askPresetQuestion(`¿Qué reformas hubo entre 2022 y 2026 en el Código Penal de Querétaro?`)">
+              Reformas recientes 2022–2026
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Penal Explorer & Modulator -->
+    <section id="explorador" class="band">
+      <div class="container">
+        <div class="headline-stack">
+          <span class="eyebrow">Catálogo normativo</span>
+          <h2>Artículos clave, sanciones y reglas de aplicación.</h2>
+          <p class="lede">
+            Filtra por categoría o busca cualquier término para consultar el fundamento exacto y llevar la duda directo al chat.
+          </p>
+        </div>
+
+        <div class="explorer-controls">
+          <div class="field-group">
+            <label for="search-articles" class="field-label">Buscar artículo, delito o palabra clave</label>
+            <input
+              id="search-articles"
+              type="search"
+              class="input-pill"
+              placeholder="Ejemplo: feminicidio, 183, corrupción, maltrato animal, multa, legítima defensa…"
+              oninput="handleArticleSearch(this.value)"
+            >
+          </div>
+          <div>
+            <button type="button" class="btn-secondary" onclick="resetExplorerFilters()">
+              Limpiar filtros
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-pills" role="group" aria-label="Filtrar artículos por categoría">
+          <button type="button" class="filter-pill" aria-pressed="true" data-cat="todos" onclick="setCategoryFilter('todos', this)">Todos</button>
+          <button type="button" class="filter-pill" aria-pressed="false" data-cat="reglas" onclick="setCategoryFilter('reglas', this)">Reglas y penas</button>
+          <button type="button" class="filter-pill" aria-pressed="false" data-cat="vida" onclick="setCategoryFilter('vida', this)">Vida e integridad</button>
+          <button type="button" class="filter-pill" aria-pressed="false" data-cat="patrimonio" onclick="setCategoryFilter('patrimonio', this)">Patrimonio y sociedad</button>
+          <button type="button" class="filter-pill" aria-pressed="false" data-cat="servicio" onclick="setCategoryFilter('servicio', this)">Servicio público</button>
+          <button type="button" class="filter-pill" aria-pressed="false" data-cat="reformas" onclick="setCategoryFilter('reformas', this)">Reformas e invalidez</button>
+        </div>
+
+        <div id="articles-grid" class="grid-3"></div>
+
+        <div id="saved-drawer" class="saved-drawer" hidden>
+          <div class="article-meta">
+            <strong>Artículos guardados en tu sesión</strong>
+            <button type="button" class="btn-secondary" onclick="clearBookmarks(this)">Vaciar guardados</button>
+          </div>
+          <div id="saved-list" class="saved-list"></div>
+        </div>
+
+        <!-- Interactive Modulator grounded in Arts. 29, 74, 75, 79, 125, 126 Bis -->
+        <div class="tile simulator-tile reveal">
+          <span class="eyebrow">Cálculo orientativo · Libro Primero</span>
+          <h3>Simulador de reglas de punibilidad y sustitución de multa</h3>
+          <p>
+            Explora cómo varían los límites de prisión conforme a los artículos 29, 74, 75 y 79 del Código Penal de Querétaro según el grado de ejecución o culpabilidad.
+          </p>
+          <div class="simulator-grid">
+            <div>
+              <span class="field-label">Modalidad o delito base de referencia</span>
+              <div class="segmented-track" role="group" aria-label="Seleccionar delito base">
+                <button type="button" class="seg-btn" data-sim-base="homicidio" aria-pressed="true" onclick="setSimBase('homicidio', this)">Homicidio simple (Art. 125)</button>
+                <button type="button" class="seg-btn" data-sim-base="robo" aria-pressed="false" onclick="setSimBase('robo', this)">Robo en comercio (Art. 183 Quáter)</button>
+                <button type="button" class="seg-btn" data-sim-base="lavado" aria-pressed="false" onclick="setSimBase('lavado', this)">Operaciones ilícitas (Art. 246-H)</button>
+                <button type="button" class="seg-btn" data-sim-base="falsedad" aria-pressed="false" onclick="setSimBase('falsedad', this)">Falsedad ante autoridad (Art. 284)</button>
+              </div>
+
+              <div style="margin-top: var(--space-md);">
+                <span class="field-label">Regla de punibilidad aplicable</span>
+                <div class="segmented-track" role="group" aria-label="Seleccionar regla de punibilidad">
+                  <button type="button" class="seg-btn" data-sim-mode="doloso" aria-pressed="true" onclick="setSimMode('doloso', this)">Consumado doloso</button>
+                  <button type="button" class="seg-btn" data-sim-mode="preter" aria-pressed="false" onclick="setSimMode('preter', this)">Preterintencional (Art. 79)</button>
+                  <button type="button" class="seg-btn" data-sim-mode="culposo" aria-pressed="false" onclick="setSimMode('culposo', this)">Culposo (Art. 75)</button>
+                  <button type="button" class="seg-btn" data-sim-mode="tentativa" aria-pressed="false" onclick="setSimMode('tentativa', this)">Tentativa sin daño det. (Art. 74)</button>
+                </div>
+              </div>
+
+              <div class="slider-row">
+                <div class="field-group">
+                  <label for="slider-days" class="field-label">Días de prisión cumplidos o por sustituir (Art. 29: equivalencia 1 a 1)</label>
+                  <input id="slider-days" type="range" min="1" max="365" value="30" oninput="syncSimDaysFromSlider(this.value)">
+                </div>
+                <div class="field-group">
+                  <label for="input-days" class="field-label">Días</label>
+                  <input id="input-days" type="number" class="input-pill" min="1" max="365" value="30" oninput="syncSimDaysFromNumber(this.value)">
+                </div>
+              </div>
+            </div>
+
+            <div class="sim-result-panel">
+              <div class="field-label" id="sim-rule-label">Rango legal aplicable (Consumado doloso)</div>
+              <div class="sim-result-value" id="sim-range-text">7 a 15 años</div>
+              <div class="sim-bar-track" aria-hidden="true">
+                <div id="sim-bar-fill" class="sim-bar-fill" style="width: 60%;"></div>
+              </div>
+              <p id="sim-explanation" style="margin: 0 0 var(--space-md);">
+                El artículo 125 prevé prisión de 7 a 15 años y de 100 a 500 días multa.
+              </p>
+              <div class="penalty-box" id="sim-multa-eq">
+                Equivalencia Art. 29: 30 días de prisión equivalen a 30 días multa sustitutiva.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Oral System & Judicial Culture Section -->
+    <section id="sistema-oral" class="band alt">
+      <div class="container">
+        <div class="headline-stack">
+          <span class="eyebrow">Derecho vivo y jurisprudencia</span>
+          <h2>Cómo opera el sistema acusatorio y oral en Querétaro.</h2>
+          <p class="lede">
+            Más allá del texto del Código Penal, el proceso penal se define en las audiencias de oralidad y en los criterios de la Suprema Corte de Justicia de la Nación.
+          </p>
+        </div>
+
+        <div class="stage-tabs" role="tablist" aria-label="Etapas y criterios del sistema oral">
+          <button type="button" class="filter-pill" role="tab" aria-selected="true" onclick="selectOralStage(0, this)">
+            Audiencia inicial y contradicción
+          </button>
+          <button type="button" class="filter-pill" role="tab" aria-selected="false" onclick="selectOralStage(1, this)">
+            Audiencia intermedia y expediente
+          </button>
+          <button type="button" class="filter-pill" role="tab" aria-selected="false" onclick="selectOralStage(2, this)">
+            Testigos de oídas (ADR 1630/2023)
+          </button>
+          <button type="button" class="filter-pill" role="tab" aria-selected="false" onclick="selectOralStage(3, this)">
+            Cultura jurídica en Querétaro
+          </button>
+        </div>
+
+        <div id="oral-stage-panel" class="tile stage-panel reveal"></div>
+      </div>
+    </section>
+
+    <!-- Reforms Timeline Table -->
+    <section id="reformas" class="band">
+      <div class="container">
+        <div class="headline-stack">
+          <span class="eyebrow">Historial legislativo 1987–2026</span>
+          <h2>Transformaciones clave del Código Penal queretano.</h2>
+          <p class="lede">
+            Hitos desde su promulgación en 1987 hasta las reformas de 2025 y 2026 y las resoluciones de invalidez de la Suprema Corte.
+          </p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table class="clean-table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha / Periódico Oficial</th>
+                <th scope="col">Cambio normativo</th>
+                <th scope="col">Impacto en el Código Penal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>23 jul 1987 (No. 30)</td>
+                <td>Expedición original</td>
+                <td>Promulgación del Código Penal para el Estado de Querétaro; entra en vigor a los 30 días (23 de agosto de 1987).</td>
+              </tr>
+              <tr>
+                <td>23 oct y 7 dic 2009 (Nos. 81 y 90)</td>
+                <td>Abrogación y restablecimiento</td>
+                <td>Se expide un nuevo código en octubre de 2009, pero en diciembre se deja sin efectos y se restablece el Código de 1987 con sus reformas.</td>
+              </tr>
+              <tr>
+                <td>12 jun 2013 (No. 28)</td>
+                <td>Tipificación de feminicidio</td>
+                <td>Se adiciona el Capítulo I Bis y el artículo 126 Bis al Libro Segundo (reformado después en 2015, 2022 y 2023).</td>
+              </tr>
+              <tr>
+                <td>1 sep 2017 (No. 61)</td>
+                <td>Desindexación a UMA</td>
+                <td>Artículo Tercero Transitorio: todas las multas previstas en el Código se entienden en Unidades de Medida y Actualización (UMA).</td>
+              </tr>
+              <tr>
+                <td>27 may 2022 (No. 39)</td>
+                <td>Reforma integral de seguridad y penas</td>
+                <td>Facultades de la Fiscalía para solicitar medidas de seguridad (Arts. 27, 68, 217 Quáter), violencia en espectáculos (Art. 134 Bis) y robo a bienes públicos (Art. 183 Quinquies).</td>
+              </tr>
+              <tr>
+                <td>10 jun 2024 y 19 sep 2025</td>
+                <td>Acciones de Inconstitucionalidad 88/2022 y 5/2021</td>
+                <td>La SCJN declara invalidez del Art. 155 (reformado en 2022) y porciones de los Arts. 170, 287, 290, 299, 300 y 303 con efectos retroactivos a diciembre de 2020.</td>
+              </tr>
+              <tr>
+                <td>Ago – Nov 2025 (Nos. 67, 72 y 90)</td>
+                <td>Art. 155, redes digitales y acecho</td>
+                <td>Nueva reforma al Art. 155, protección de niñez y adolescencia en redes sociales digitales, y tipificación en materia de acecho.</td>
+              </tr>
+              <tr>
+                <td>Feb – Jul 2026 (Nos. 17, 19 y 58)</td>
+                <td>Extorsión, Art. 217 Bis y abuso sexual</td>
+                <td>Derogación local del delito de extorsión (23 feb), reforma al segundo párrafo del Art. 217 Bis (27 feb) y reforma en materia de abuso sexual (15/17 jul 2026).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-authorship">
+        Proyecto realizado para la materia de Taller de IA. Por Samuel Aaron Terrazas Mariñelarena
+      </p>
+      <p class="footer-disclaimer">
+        Esta herramienta tiene fines académicos y de orientación informativa. No constituye asesoría jurídica profesional ni sustituye la representación de un abogado titulado.
+      </p>
+      <p class="footer-sources">
+        Fuentes consultadas: Código Penal para el Estado de Querétaro (texto vigente con reformas hasta julio de 2026 y versión histórica CNDH); Córdova Esparza, K. E. y Terven Salinas, A. (2022), «Adaptación y persistencia del sistema penal en el distrito judicial de Querétaro, México», Desacatos 70; Primera Sala de la SCJN, Amparo Directo en Revisión 1630/2023 (Ponente: Ministra Loretta Ortiz Ahlf, junio de 2025); Catálogo editorial Tirant Lo Blanch y Legislación Especializada Penal Querétaro 2026.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Action Widget (Always visible bottom-right) -->
+  <div id="legal-chat-widget" class="chat-widget" aria-live="polite">
+    <section id="chat-panel" class="chat-panel hidden" role="dialog" aria-label="Ventana de chat del compañero legal">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <span class="status-dot" title="Motor de análisis penal activo"></span>
+          <div>
+            <h3>Compañero Legal · Querétaro</h3>
+            <p>Criterio jurídico · Código Penal y Sistema Oral</p>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button type="button" id="clear-chat-btn" class="icon-btn" onclick="handleClearChat(this)" title="Reiniciar conversación">
+            Reiniciar
+          </button>
+          <button type="button" class="icon-btn" onclick="closeChatWidget()" aria-label="Cerrar ventana de chat">
+            <i data-lucide="x" width="18" height="18" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="chat-messages" class="chat-messages"></div>
+
+      <form class="chat-composer" onsubmit="handleChatSubmit(event)">
+        <label for="chat-input" class="chat-composer-label">Pregunta por un delito, artículo o plantea un caso práctico</label>
+        <div class="chat-composer-row">
+          <input
+            id="chat-input"
+            type="text"
+            class="input-pill"
+            placeholder="Ej. ¿Qué pasa si robo sin violencia?, Art. 126 Bis, testigos de oídas…"
+            autocomplete="off"
+          >
+          <button type="submit" class="btn-primary">Enviar</button>
+        </div>
+      </form>
+    </section>
+
+    <div class="chat-launcher-wrap">
+      <div id="chat-tooltip" class="chat-tooltip" role="button" tabindex="0" onclick="toggleChatWidget()" onkeydown="handleTooltipKey(event)">
+        Consulta a tu compañero legal
+      </div>
+      <button
+        type="button"
+        id="chat-fab"
+        class="chat-fab"
+        aria-expanded="false"
+        aria-controls="chat-panel"
+        aria-label="Consulta a tu compañero legal"
+        title="Consulta a tu compañero legal"
+        onclick="toggleChatWidget()"
+      >
+        <i data-lucide="message-square-text" width="26" height="26" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // BASE DE CONOCIMIENTO JURÍDICO: CÓDIGO PENAL DE QUERÉTARO Y JURISPRUDENCIA
+    // =========================================================================
+    const ARTICLES_DATA = [
+      {
+        id: `art-1-2`,
+        article: `Arts. 1 y 2`,
+        title: `Aplicación en el espacio`,
+        category: `reglas`,
+        tag: `Ámbito territorial`,
+        isReform: false,
+        penalty: `Competencia de tribunales de Querétaro`,
+        summary: `Aplica a hechos realizados en Querétaro. También rige hechos iniciados o preparados en otra entidad cuando produzcan o pretendan efectos en Querétaro, si el imputado se encuentra aquí y no se ejerció acción penal allá.`,
+        prompt: `¿Cuándo se aplica el Código Penal de Querétaro según los artículos 1 y 2?`
+      },
+      {
+        id: `art-26`,
+        article: `Art. 26`,
+        title: `Causas que excluyen el delito`,
+        category: `reglas`,
+        tag: `Reglas generales`,
+        isReform: false,
+        penalty: `Investigación y aplicación de oficio`,
+        summary: `Las causas que excluyen el delito (como legítima defensa, estado de necesidad o ausencia de conducta) se investigarán y harán valer en cualquier estado del procedimiento, de oficio o a petición de parte.`,
+        prompt: `¿Cómo funcionan las causas excluyentes del delito y la legítima defensa en el artículo 26?`
+      },
+      {
+        id: `art-27-34-35`,
+        article: `Arts. 27, 29, 34 y 35`,
+        title: `Catálogo de penas, multa en UMA y reparación`,
+        category: `reglas`,
+        tag: `Penas y medidas`,
+        isReform: false,
+        penalty: `Hasta 750 días multa (salvo excepción legal) · 1 día multa = 1 día de prisión`,
+        summary: `Incluye prisión, tratamiento en libertad, semilibertad, multa, reparación de daños y perjuicios (exigida de oficio por la Fiscalía), trabajo comunitario, publicación de sentencia y destitución. Desde 2017 las multas se calculan en UMA.`,
+        prompt: `¿Cuáles son las penas del artículo 27 y cómo funciona la multa y reparación del daño?`
+      },
+      {
+        id: `art-74-75-79`,
+        article: `Arts. 74, 75 y 79`,
+        title: `Tentativa, delito culposo y preterintencional`,
+        category: `reglas`,
+        tag: `Punibilidad`,
+        isReform: false,
+        penalty: `Tentativa: 3m–5a · Culposo: hasta 1/2 · Preterintencional: hasta 3/4`,
+        summary: `Si en tentativa no puede determinarse el daño pretendido: 3 meses a 5 años y hasta 50 días multa. Delito culposo: 3 días a 7 años sin exceder la mitad del doloso. Preterintencional: 3 meses hasta 3/4 partes de la pena dolosa.`,
+        prompt: `¿Qué penas corresponden a la tentativa, delitos culposos y preterintencionales?`
+      },
+      {
+        id: `art-125`,
+        article: `Arts. 125 y 125 Bis`,
+        title: `Homicidio simple y pérdida de la vida`,
+        category: `vida`,
+        tag: `Contra la vida`,
+        isReform: false,
+        penalty: `7 a 15 años de prisión y 100 a 500 días multa`,
+        summary: `Al que prive de la vida a otra persona se le impondrá prisión de 7 a 15 años y multa de 100 a 500 días multa. Para determinar la pérdida de la vida se remite a la Ley General de Salud (Art. 125 Bis).`,
+        prompt: `¿Qué establece el artículo 125 sobre el homicidio simple?`
+      },
+      {
+        id: `art-126-bis`,
+        article: `Art. 126 Bis`,
+        title: `Feminicidio y razones de género`,
+        category: `vida`,
+        tag: `Reforma 2013–2023`,
+        isReform: true,
+        penalty: `20 a 50 años de prisión y 500 a 750 días multa`,
+        summary: `Privar de la vida a una mujer por razones de género: incluye datos de amenazas, acoso o lesiones del sujeto activo (fracción III) y antecedentes de violencia familiar, laboral, escolar o vecinal (fracción V).`,
+        prompt: `¿Cuáles son las penas y razones de género del feminicidio en el artículo 126 Bis?`
+      },
+      {
+        id: `art-134`,
+        article: `Art. 134`,
+        title: `Homicidio o lesiones por móviles de piedad`,
+        category: `vida`,
+        tag: `Contra la vida`,
+        isReform: false,
+        penalty: `1 mes a 9 años de prisión y 50 a 400 días multa`,
+        summary: `Aplica a quien cause lesiones u homicidio por móviles de piedad o súplicas notorias y reiteradas de la víctima ante la inutilidad de todo auxilio, sin exceder la sanción del delito simple intencional.`,
+        prompt: `¿Qué sanción contempla el artículo 134 para homicidio por móviles de piedad?`
+      },
+      {
+        id: `art-134-bis`,
+        article: `Art. 134 Bis`,
+        title: `Violencia en eventos deportivos y espectáculos`,
+        category: `vida`,
+        tag: `Reforma P.O. 39, 2022`,
+        isReform: true,
+        penalty: `2 a 6 años de prisión y 500 a 1000 días multa`,
+        summary: `Sanciona a quien dentro de un estadio, recinto, estacionamiento o calles colindantes cometa o incite actos que produzcan daños a personas o bienes, sin perjuicio de otros delitos.`,
+        prompt: `¿Cómo sanciona el artículo 134 Bis la violencia en estadios y espectáculos?`
+      },
+      {
+        id: `art-183-184`,
+        article: `Arts. 183 Quáter, Quinquies y 184`,
+        title: `Robo en comercio, bienes públicos y oficinas`,
+        category: `patrimonio`,
+        tag: `Patrimonio`,
+        isReform: true,
+        penalty: `Comercio: 1–15 años · Bienes públicos: 4–10 años · Documentos: 6m–5a`,
+        summary: `Robo en bodega o local comercial fijo o móvil (1 a 15 años). Robo sobre equipamiento urbano o bienes educativos que afecte servicios públicos (4 a 10 años y 500–1000 días multa). Robo de documento en oficina pública (6 meses a 5 años).`,
+        prompt: `¿Qué penas existen para el robo en local comercial y sobre bienes de utilidad pública?`
+      },
+      {
+        id: `art-217-quater`,
+        article: `Art. 217 Quáter`,
+        title: `Seguridad y auxilio a víctimas`,
+        category: `vida`,
+        tag: `Protección procesal`,
+        isReform: true,
+        penalty: `Medidas y providencias cautelares durante investigación o proceso`,
+        summary: `La Fiscalía General del Estado de Querétaro decretará o solicitará las medidas pertinentes para proporcionar seguridad y auxilio a las víctimas en salvaguarda de su integridad física y psíquica.`,
+        prompt: `¿Qué medidas de protección prevé el artículo 217 Quáter para las víctimas?`
+      },
+      {
+        id: `art-218-221`,
+        article: `Arts. 218, 219, 220 y 221`,
+        title: `Peligro común, armas, asociación y saqueos`,
+        category: `patrimonio`,
+        tag: `Seguridad colectiva`,
+        isReform: true,
+        penalty: `Saqueos/apología agravada: 3 a 6 años · Asociación: 3m a 4a`,
+        summary: `Incendio o explosión (Art. 218: 1–5 años); armas prohibidas (Art. 219: 3m–2a); asociación delictuosa permanente (Art. 220: 3m–4a + 300–500 días multa); convocatoria o difusión de saqueos en comercios u hospitales (Art. 221: 3–6 años y 500–1000 días multa).`,
+        prompt: `¿Cómo regula el código las armas prohibidas, la asociación delictuosa y los saqueos?`
+      },
+      {
+        id: `art-229-235`,
+        article: `Arts. 229 Quáter, 230 y 235 Quáter`,
+        title: `Emergencias falsas, sellos e insignias policiales`,
+        category: `patrimonio`,
+        tag: `Fe pública`,
+        isReform: false,
+        penalty: `Insignias policiales: 5m–8a · Sellos: 1–5a · Emergencia falsa con daño: +5m–2a`,
+        summary: `Llamada falsa de emergencia que cause accidente o daño agrega 5 meses a 2 años y 500–1000 días multa (de oficio). Falsificación de sellos/llaves oficiales (1–5 años). Venta sin autorización de equipo o vestimenta policial (5 meses a 8 años y decomiso).`,
+        prompt: `¿Qué sanción tiene comercializar uniformes policiales o hacer llamadas falsas de emergencia?`
+      },
+      {
+        id: `art-246-d`,
+        article: `Arts. 246-D Bis, Quintus y Sextus`,
+        title: `Delitos contra los animales y excepciones`,
+        category: `patrimonio`,
+        tag: `Protección animal`,
+        isReform: false,
+        penalty: `Maltrato: 3–15 meses · Peleas de perros: 1–4 años`,
+        summary: `Maltrato doloso a animales domésticos o ferales causando lesiones (3 a 15 meses y 100–200 días multa). Peleas de perros (1 a 4 años y 300–600 días multa). El Art. 246-D Sextus excluye tauromaquia, charrería, peleas de gallos y fiestas tradicionales.`,
+        prompt: `¿Cómo sanciona el código el maltrato animal y qué excepciones existen?`
+      },
+      {
+        id: `art-246-h-273`,
+        article: `Arts. 246-H, 259, 272, 273, 283 y 284`,
+        title: `Lavado de dinero, corrupción y falsedad`,
+        category: `servicio`,
+        tag: `Corrupción y hacienda`,
+        isReform: false,
+        penalty: `Operaciones ilícitas: 5 a 15 años y 1000 a 5000 UMA`,
+        summary: `Operaciones con recursos de procedencia ilícita (Art. 246-H) y en materia de corrupción (Art. 273): 5 a 15 años y 1000–5000 UMA. Define servidor público (Art. 259), tráfico de influencias (Art. 272), ocultación indebida (Art. 283: 6m–6a) y falsedad ante autoridades (Art. 284: 3m–3a).`,
+        prompt: `¿Qué penas aplican a operaciones con recursos de procedencia ilícita y falsedad ante autoridades?`
+      },
+      {
+        id: `art-303-invalidez`,
+        article: `Art. 303 y AI 88/2022 · 5/2021`,
+        title: `Quebrantamiento de medidas e invalidez SCJN`,
+        category: `reformas`,
+        tag: `Control constitucional`,
+        isReform: true,
+        penalty: `Quebrantamiento doloso: 1 a 5 años y 500 a 1000 días multa`,
+        summary: `El Art. 303 castiga quebrantar dolosamente penas no privativas o medidas cautelares. La SCJN declaró invalidez del Art. 155 (AI 88/2022) y porciones de los Arts. 170, 287, 290, 299, 300 y 303 (AI 5/2021 con efectos retroactivos a dic 2020).`,
+        prompt: `¿Qué resolvió la Suprema Corte en las Acciones de Inconstitucionalidad 88/2022 y 5/2021?`
+      },
+      {
+        id: `reformas-2025-2026`,
+        article: `Reformas 2025–2026`,
+        title: `Redes digitales, acecho, extorsión y abuso sexual`,
+        category: `reformas`,
+        tag: `Actualización 2026`,
+        isReform: true,
+        penalty: `Reformas publicadas hasta julio de 2026`,
+        summary: `En 2025 se reformó el Art. 155, se protegieron derechos de niñez en redes sociales digitales y se legisló en materia de acecho. En 2026 se derogó el delito local de extorsión (febrero), se reformó el Art. 217 Bis y se reformó en materia de abuso sexual (julio).`,
+        prompt: `¿Qué reformas se aprobaron en 2025 y 2026 en el Código Penal de Querétaro?`
+      }
+    ];
+
+    const ORAL_STAGES = [
+      {
+        badge: `Etapa 1 · Audiencia Inicial`,
+        title: `Principio de contradicción y datos de prueba`,
+        desc: `En el sistema acusatorio y oral, el juez de control decide si el imputado queda en libertad o se vincula a proceso penal. En esta fase inicial, las actuaciones de la Fiscalía no son pruebas plenas sino «datos de prueba» que se convertirán en prueba hasta su desahogo en juicio oral.`,
+        bullets: [
+          `Derecho de defensa activa: el imputado debe contar con un defensor titulado y experto en el sistema acusatorio desde la detención.`,
+          `Tensión documentada en Querétaro: la etnografía en juzgados orales advirtió casos donde la jueza otorgó mayor peso a los datos de prueba de la fiscalía al justificar agravantes (alevosía, ventaja y dolo), reproduciendo inercias de inmediatez del modelo tradicional.`,
+          `Retórica de voluntas legis: el discurso técnico presenta la resolución como voluntad impersonal de la ley para legitimar la autoridad judicial.`
+        ],
+        calloutTitle: `¿Por qué importa en la práctica?`,
+        calloutText: `Comprender la diferencia entre un dato de prueba y una prueba desahogada permite exigir debates reales sobre la legalidad de la detención y evitar que declaraciones sin defensa se den por ciertas.`,
+        prompt: `Explícame la diferencia entre dato de prueba y prueba en la audiencia inicial de Querétaro.`
+      },
+      {
+        badge: `Etapa 2 · Audiencia Intermedia`,
+        title: `Descubrimiento probatorio y persistencia del expediente`,
+        desc: `En la audiencia intermedia se ofrecen y debaten los medios de prueba que pasarán a juicio oral. Aunque la reforma de 2008 buscó erradicar el formalismo escrito, el expediente judicial sigue sincronizando la actuación de jueces, fiscales y defensores.`,
+        bullets: [
+          `Igualdad de partes: en una audiencia intermedia observada en Querétaro (22 de junio de 2017), la jueza desechó una prueba testimonial de la fiscalía porque no reveló el contenido de la entrevista ni las preguntas a la defensa.`,
+          `Barrera de acceso al público: aunque las audiencias son públicas por ley, en la práctica las pantallas desactualizadas y filtros policiales restringen el acceso, manteniendo el secreto del expediente.`,
+          `Coexistencia de modelos: como señala Héctor Fix-Zamudio, la oralidad procesal convive con una proporción razonable de formalización escrita.`
+        ],
+        calloutTitle: `Efecto en el derecho vivo`,
+        calloutText: `Si la Fiscalía oculta el contenido de una entrevista o medio de prueba durante el descubrimiento probatorio, la defensa puede solicitar su exclusión en la audiencia intermedia por violar la igualdad procesal.`,
+        prompt: `¿Qué ocurre si la fiscalía oculta una entrevista en la audiencia intermedia?`
+      },
+      {
+        badge: `Etapa 3 · Criterio SCJN (ADR 1630/2023)`,
+        title: `Testigos de oídas y razones de género en feminicidio`,
+        desc: `En sesión del 25 de junio de 2025, la Primera Sala de la SCJN resolvió el Amparo Directo en Revisión 1630/2023 (originado en el Distrito Judicial de San Juan del Río, Querétaro, por feminicidio bajo el Art. 126 Bis, fracciones III y V).`,
+        bullets: [
+          `Valoración libre y lógica (Art. 359 CNPP): los testimonios por referencia de terceros («testigos de oídas», como psicólogas que atendieron a la víctima) no se desechan automáticamente; tienen valor indiciario y alcanzan prueba plena al enlazarse con entrevistas previas, cartas de temor de la víctima y otros indicios.`,
+          `Absolución de violencia familiar vs. feminicidio: aunque se absolviera por el delito autónomo de violencia familiar, pueden acreditarse antecedentes de violencia psicológica y económica (incumplimiento de pensión alimentaria) para colmar la «razón de género» del Art. 126 Bis.`,
+          `Geolocalización y comunicaciones: el acceso posterior a registros telefónicos y geolocalización requiere control judicial previo conforme al artículo 16 constitucional.`
+        ],
+        calloutTitle: `Resolución de la Primera Sala`,
+        calloutText: `La SCJN desechó el recurso de revisión al no subsistir una cuestión propiamente constitucional, dejando firme la condena de 38 años y 9 meses de prisión.`,
+        prompt: `Resume el criterio del Amparo Directo en Revisión 1630/2023 sobre testigos de oídas y feminicidio.`
+      },
+      {
+        badge: `Perspectiva Sociojurídica`,
+        title: `Cultura jurídica interna en el distrito de Querétaro`,
+        desc: `La investigación de Karen Edith Córdova Esparza y Adriana Terven Salinas (Desacatos 70, 2022) muestra que la reforma penal no cambia de inmediato los hábitos de los operadores, quienes conservan fronteras simbólicas entre el derecho y la sociedad.`,
+        bullets: [
+          `Cultura jurídica interna vs. externa (Friedman y Nelken): la cultura interna reúne actitudes y rutinas de jueces, fiscales y defensores que explican por qué persisten prácticas del sistema inquisitivo mixto.`,
+          `Complicidad objetiva en el campo (Bourdieu): aunque fiscales y defensores parecen adversarios en sala, comparten un saber técnico exclusivo y el interés común de conservar el monopolio del capital jurídico.`,
+          `Encantamiento del expediente: el resguardo de archivos y el lenguaje especializado refuerzan la distancia frente al ciudadano común.`
+        ],
+        calloutTitle: `Utilidad para el usuario`,
+        calloutText: `Esta plataforma busca precisamente reducir esa brecha informativa: acercar el contenido técnico del Código Penal de Querétaro a cualquier persona con lenguaje claro.`,
+        prompt: `¿Qué revela la etnografía sobre la cultura jurídica en los juzgados orales de Querétaro?`
+      }
+    ];
+
+    const SIM_BASES = {
+      homicidio: { name: `Homicidio simple (Art. 125)`, min: 7, max: 15, unit: `años`, multas: `100 a 500 días multa` },
+      robo: { name: `Robo en local comercial (Art. 183 Quáter)`, min: 1, max: 15, unit: `años`, multas: `100 a 750 días multa` },
+      lavado: { name: `Operaciones con recursos ilícitos (Art. 246-H)`, min: 5, max: 15, unit: `años`, multas: `1000 a 5000 UMA` },
+      falsedad: { name: `Falsedad ante autoridades (Art. 284)`, min: 0.25, max: 3, unit: `años`, multas: `hasta 50 UMA` }
+    };
+
+    // =========================================================================
+    // MOTOR SEMÁNTICO Y CONVERSACIONAL CON CRITERIO JURÍDICO
+    // =========================================================================
+    const KNOWLEDGE_NODES = [
+      {
+        id: `feminicidio`,
+        badge: `Art. 126 Bis · Feminicidio y Razones de Género`,
+        title: `Delito de Feminicidio en Querétaro`,
+        exactRefs: [`126 bis`, `126bis`, `art 126`, `articulo 126`],
+        keywords: [`feminicidio`, `razones de genero`, `razon de genero`, `muerte de mujer`, `matar a una mujer`, `violencia de genero`, `violencia contra la mujer`],
+        intro: `En Querétaro, privar de la vida a una mujer por razones derivadas de su género se tipifica como **feminicidio** en el artículo 126 Bis (adicionado en 2013 y reformado en 2015, 2022 y 2023). No todo homicidio de una mujer es feminicidio: la clave jurídica es acreditar al menos una de las razones de género previstas en la ley.`,
+        bullets: [
+          `**Punibilidad:** de **20 a 50 años de prisión** y de **500 a 750 días multa** (calculados en UMA), además de la pérdida de derechos sucesorios o de familia respecto de la víctima.`,
+          `**Fracción III (Amenazas o lesiones previas):** se actualiza cuando existen datos que establezcan que hubo amenazas, acoso, violencia o lesiones del sujeto activo en contra de la víctima.`,
+          `**Fracción V (Antecedentes de violencia):** cuando existan antecedentes o datos de cualquier tipo de violencia en el ámbito familiar, laboral, escolar o vecinal del activo contra la víctima.`,
+          `**Otras hipótesis típicas:** signos de violencia sexual, lesiones infamantes o degradantes, incomunicación previa o exposición del cuerpo en lugar público.`
+        ],
+        criterio: `Criterio práctico (SCJN ADR 1630/2023): La Primera Sala confirmó en un caso de San Juan del Río que, aunque se absuelva al acusado por el delito autónomo de violencia familiar, los antecedentes de violencia psicológica o económica (como restringir la pensión alimenticia para ejercer control) sí bastan para tener por acreditada la razón de género de la fracción V.`,
+        followUps: [
+          `¿Cómo se valoran los testigos de oídas en feminicidio?`,
+          `¿Qué diferencia hay con el homicidio simple (Art. 125)?`,
+          `¿Qué medidas de protección hay para víctimas (Art. 217 Quáter)?`
+        ],
+        basePenalty: { min: 20, max: 50, multaMin: 500, multaMax: 750 }
+      },
+      {
+        id: `adr_1630_2023`,
+        badge: `SCJN · Amparo Directo en Revisión 1630/2023`,
+        title: `Testigos de oídas, violencia económica y geolocalización`,
+        exactRefs: [`1630/2023`, `1630`, `adr 1630`],
+        keywords: [`testigo de oidas`, `testigos de oidas`, `oidas`, `loretta ortiz`, `san juan del rio`, `geolocalizacion`, `sabana de llamadas`, `pension alimenticia`, `presuncion de inocencia`, `prueba indiciaria`],
+        intro: `El **Amparo Directo en Revisión 1630/2023** (resuelto por la Primera Sala de la SCJN el 25 de junio de 2025, bajo la ponencia de la Ministra Loretta Ortiz Ahlf) es un precedente fundamental nacido en el Distrito Judicial de San Juan del Río, Querétaro, donde se confirmó una condena de **38 años y 9 meses de prisión** por feminicidio.`,
+        bullets: [
+          `**Validez de los «testigos de oídas» (Art. 359 CNPP):** En el sistema acusatorio rige la valoración libre y lógica de la prueba. Los testimonios por referencia de terceros (por ejemplo, psicólogas o familiares a quienes la víctima contó el maltrato antes de morir) **no se desechan automáticamente**; tienen valor indiciario que, enlazado con cartas de temor, entrevistas previas y peritajes, integra prueba circunstancial plena.`,
+          `**Violencia económica como razón de género:** Limitar o condicionar la pensión alimentaria vulnera el derecho de los hijos y constituye una forma de control económico que acredita antecedentes de violencia (Art. 126 Bis, fracción V).`,
+          `**Geolocalización y registros telefónicos:** El acceso ministerial a comunicaciones almacenadas o geolocalización exige **autorización judicial previa** conforme al artículo 16 constitucional.`
+        ],
+        criterio: `Criterio práctico: En delitos cometidos en ausencia de testigos presenciales directos (como suele ocurrir en la violencia de género dentro del hogar), la prueba indiciaria o circunstancial construida con testigos de referencia y dictámenes periciales es plenamente constitucional para derrotar la presunción de inocencia si no existe duda razonable.`,
+        followUps: [
+          `¿Cuál es la pena del feminicidio en el Art. 126 Bis?`,
+          `¿Qué diferencia hay entre dato de prueba y prueba en juicio oral?`,
+          `¿Qué pasa si la fiscalía oculta una entrevista en audiencia intermedia?`
+        ]
+      },
+      {
+        id: `homicidio`,
+        badge: `Arts. 125, 125 Bis y 134 · Delitos contra la vida`,
+        title: `Homicidio simple, determinación de muerte y móviles de piedad`,
+        exactRefs: [`art 125`, `articulo 125`, `125 bis`, `art 134`, `articulo 134`],
+        keywords: [`homicidio`, `privar de la vida`, `matar`, `asesinato`, `asesinar`, `piedad`, `eutanasia`, `muerte cerebral`, `perdida de la vida`, `homicidio calificado`],
+        intro: `El Título Primero del Libro Segundo protege la vida y la integridad corporal. El Código Penal de Querétaro distingue con claridad la intencionalidad, las calificativas y los móviles humanitarios:`,
+        bullets: [
+          `**Homicidio simple intencional (Art. 125):** Se impone de **7 a 15 años de prisión** y de **100 a 500 días multa** a quien prive de la vida a otra persona sin que concurran calificativas especiales.`,
+          `**Determinación de la pérdida de la vida (Art. 125 Bis):** Para efectos penales, la certificación de la muerte se rige estrictamente por los criterios médicos de la **Ley General de Salud** (muerte encefálica o paro cardíaco irreversible).`,
+          `**Homicidio o lesiones por móviles de piedad (Art. 134):** Prevé una punibilidad atenuada de **1 mes a 9 años de prisión** y de **50 a 400 días multa** cuando se actúe por móviles de piedad y ante súplicas notorias y reiteradas de la víctima frente a la inutilidad de todo auxilio, sin que pueda exceder la pena del delito simple.`
+        ],
+        criterio: `Criterio práctico: Si el homicidio se comete de forma imprudencial (por ejemplo, en un hecho de tránsito sin dolo), no se aplica la pena de 7 a 15 años completa, sino la regla de los delitos culposos del artículo 75 (prisión de 3 días a 7 años, sin rebasar la mitad del delito doloso).`,
+        followUps: [
+          `¿Cuánto disminuye la pena si el homicidio fue culposo (Art. 75)?`,
+          `¿Cuándo se considera feminicidio (Art. 126 Bis)?`,
+          `¿Cómo opera la legítima defensa (Art. 26)?`
+        ],
+        basePenalty: { min: 7, max: 15, multaMin: 100, multaMax: 500 }
+      },
+      {
+        id: `estadios`,
+        badge: `Art. 134 Bis · Violencia en Espectáculos`,
+        title: `Violencia en eventos deportivos y espectáculos públicos`,
+        exactRefs: [`134 bis`, `art 134 bis`, `articulo 134 bis`],
+        keywords: [`estadio`, `corregidora`, `evento deportivo`, `espectaculo`, `futbol`, `barra`, `riña en estadio`, `partido`, `recinto`],
+        intro: `A raíz de la reforma publicada en el Periódico Oficial No. 39 el **27 de mayo de 2022**, se adicionó el Capítulo III Bis y el **artículo 134 Bis** para sancionar específicamente la violencia en estadios y espectáculos en Querétaro:`,
+        bullets: [
+          `**Sanción penal:** de **2 a 6 años de prisión** y de **500 a 1000 días multa** (en UMA).`,
+          `**Conducta típica:** cometer por sí mismo, o **incitar a otros** a cometer actos que produzcan daños a las personas o a sus bienes.`,
+          `**Ámbito espacial:** aplica tanto **dentro del estadio o recinto** donde se desarrolla el espectáculo, como en las áreas de **estacionamiento y calles colindantes**.`,
+          `**Concurso con otros delitos:** esta pena se aplica **sin perjuicio** de las sanciones que correspondan por lesiones, homicidio en grado de tentativa o daños dolosos.`
+        ],
+        criterio: `Criterio práctico: Basta con incitar activamente a la violencia que derive en daños dentro del perímetro del recinto o calles aledañas para encuadrar en el tipo penal, acumulándose en su caso con las lesiones causadas a las víctimas.`,
+        followUps: [
+          `¿Qué otras reformas importantes hubo entre 2022 y 2026?`,
+          `¿Cómo se castiga la convocatoria a saqueos (Art. 221)?`,
+          `¿Cómo se exige la reparación del daño (Art. 35)?`
+        ],
+        basePenalty: { min: 2, max: 6, multaMin: 500, multaMax: 1000 }
+      },
+      {
+        id: `robo`,
+        badge: `Arts. 183 Quáter, 183 Quinquies y 184 · Delitos Patrimoniales`,
+        title: `Robo en comercio, bienes de utilidad pública y oficinas`,
+        exactRefs: [`183`, `183 quater`, `183 quinquies`, `184`, `art 183`, `art 184`],
+        keywords: [`robo`, `robar`, `robaron`, `asaltaron`, `asalto`, `hurto`, `tienda`, `comercio`, `local comercial`, `bodega`, `negocio`, `cable`, `alcantarilla`, `escuela`, `equipamiento urbano`, `oficina publica`],
+        intro: `El Código Penal de Querétaro protege de manera reforzada el patrimonio comercial, la infraestructura pública y la documentación oficial mediante agravantes específicas en los artículos 183 Quáter, 183 Quinquies y 184:`,
+        bullets: [
+          `**Robo en local comercial o bodega (Art. 183 Quáter):** Se sanciona con **1 a 15 años de prisión** y de **100 a 750 días multa** cuando el robo se comete en bodega o local comercial, sea **fijo o móvil**, abierto al público o destinado al resguardo de mercancías.`,
+          `**Robo sobre bienes de utilidad pública o educativos (Art. 183 Quinquies, reforma 2022):** Impone de **4 a 10 años de prisión** y de **500 a 1000 días multa** cuando recae sobre equipamiento urbano, luminarias, cableado o bienes de instituciones educativas y **dañe o interrumpa un servicio público**.`,
+          `**Robo de documentos en oficina pública (Art. 184):** Se castiga con **6 meses a 5 años de prisión** cuando se sustraen expedientes o documentos bajo resguardo oficial.`
+        ],
+        criterio: `Criterio práctico: Si eres víctima de robo en tu negocio o domicilio, al presentar la denuncia ante la Fiscalía General del Estado debes acreditar la preexistencia y valor de los bienes (con facturas, notas, inventario o testigos); la Fiscalía está obligada de oficio a exigir la reparación integral del daño conforme al artículo 35.`,
+        followUps: [
+          `¿Cómo se calcula la tentativa si no lograron llevarse nada (Art. 74)?`,
+          `¿Cómo funciona la reparación del daño (Art. 35)?`,
+          `¿Qué sanción hay por convocar a saqueos en comercios (Art. 221)?`
+        ],
+        basePenalty: { min: 1, max: 15, multaMin: 100, multaMax: 750 }
+      },
+      {
+        id: `punibilidad`,
+        badge: `Arts. 74, 75 y 79 · Reglas de Punibilidad`,
+        title: `Tentativa, delito culposo (imprudencial) y preterintencional`,
+        exactRefs: [`art 74`, `art 75`, `art 79`, `articulo 74`, `articulo 75`, `articulo 79`],
+        keywords: [`tentativa`, `intento`, `no se consuma`, `culposo`, `culposa`, `imprudencia`, `accidente`, `sin querer`, `sin intencion`, `choque`, `atropellar`, `preterintencional`, `exceso`],
+        intro: `En el Derecho Penal queretano la pena no es rígida: el Libro Primero ajusta los márgenes de prisión y multa según si el hecho quedó en intento (**tentativa**), fue por descuido o accidente (**culposo**) o causó un daño mayor al querido (**preterintencional**):`,
+        bullets: [
+          `**Tentativa cuando no es posible determinar el daño pretendido (Art. 74):** Se aplica de **3 meses a 5 años de prisión** y **hasta 50 días multa**. Si el delito que se intentó sí está determinado, la pena se gradúa proporcionalmente menor a la del delito consumado.`,
+          `**Delitos culposos o imprudenciales (Art. 75):** Se sancionan con **3 días a 7 años de prisión**, de **3 a 90 días multa** y suspensión hasta por 5 años para ejercer profesión u oficio, con una regla de oro: **nunca puede exceder de la mitad de la pena** que correspondería si el delito hubiera sido doloso.`,
+          `**Delitos preterintencionales (Art. 79):** Cuando el agente quería causar un daño menor pero produjo un resultado más grave previsible, la pena va de **3 meses hasta las tres cuartas partes (3/4)** de la pena dolosa, y hasta dos terceras partes en las demás sanciones.`
+        ],
+        criterio: `Criterio práctico: Puedes usar el «Simulador de reglas de punibilidad» que está aquí mismo en la sección de Catálogo Penal para calcular al instante cómo baja el rango de años entre un delito doloso, uno preterintencional y uno culposo.`,
+        followUps: [
+          `¿Cómo se sustituyen días de prisión por multa (Art. 29)?`,
+          `¿Qué son las causas excluyentes del delito (Art. 26)?`,
+          `¿Cómo se calcula una multa en UMA en pesos?`
+        ]
+      },
+      {
+        id: `penas_multas_uma`,
+        badge: `Arts. 27, 29, 34, 35 y 68 · Penas, UMA y Reparación`,
+        title: `Catálogo de penas, cálculo en UMA, sustitución y reparación del daño`,
+        exactRefs: [`art 27`, `art 29`, `art 34`, `art 35`, `art 68`, `articulo 27`, `articulo 29`, `articulo 34`, `articulo 35`],
+        keywords: [`multa`, `uma`, `salario minimo`, `pesos`, `cuanto es en dinero`, `reparacion del daño`, `sustitucion`, `sustitutiva`, `conmutacion`, `catalogo de penas`, `trabajo comunitario`, `medidas de seguridad`, `fianza`],
+        intro: `Los artículos 27 a 35 y 68 del Código Penal de Querétaro establecen qué sanciones puede imponer un juez y cómo se cuantifican económicamente:`,
+        bullets: [
+          `**Catálogo de penas (Art. 27):** Prisión, tratamiento en libertad, semilibertad, multa, reparación de daños y perjuicios, trabajos en favor de la comunidad, publicación especial de sentencia, destitución e inhabilitación.`,
+          `**Cálculo en UMA (Art. 34 y Transitorio 2017):** El límite ordinario es de **750 días multa** (salvo delitos que expresamente fijan hasta 1,000 o 5,000). Desde el 1 de septiembre de 2017, **todas las multas se calculan en Unidades de Medida y Actualización (UMA)** vigentes al momento del hecho, ya no en salarios mínimos.`,
+          `**Equivalencia 1 a 1 (Art. 29):** Cuando procede la multa sustitutiva de prisión, **un día multa equivale exactamente a un día de prisión**.`,
+          `**Reparación del daño de oficio (Art. 35) y medidas de seguridad (Art. 68):** La Fiscalía General del Estado tiene el deber de exigir de oficio el pago de la reparación del daño (y solicitar medidas de seguridad), en coadyuvancia con la víctima y su asesor jurídico.`
+        ],
+        criterio: `Criterio práctico sobre montos: Para convertir «días multa» a pesos mexicanos, multiplica el número de días multa por el valor diario de la UMA vigente en el año en que ocurrió el delito (por ejemplo, si una UMA diaria ronda los $113–$118 MXN, 100 días multa equivalen aproximadamente a $11,300–$11,800 MXN). El juez fija los días según la gravedad y la capacidad económica del sentenciado.`,
+        followUps: [
+          `¿Cómo se reducen las penas en tentativa o delito culposo?`,
+          `¿Qué medidas de protección inmediata tiene la víctima (Art. 217 Quáter)?`,
+          `¿Qué pena tiene quebrantar una medida cautelar (Art. 303)?`
+        ]
+      },
+      {
+        id: `excluyentes`,
+        badge: `Art. 26 · Causas que excluyen el delito`,
+        title: `Excluyentes de responsabilidad penal y legítima defensa`,
+        exactRefs: [`art 26`, `articulo 26`],
+        keywords: [`excluyente`, `excluyentes`, `legitima defensa`, `defensa propia`, `estado de necesidad`, `inimputabilidad`, `miedo grave`, `error invencible`, `de oficio`],
+        intro: `El **artículo 26** del Código Penal de Querétaro contiene una garantía procesal esencial para cualquier persona investigada o acusada:`,
+        bullets: [
+          `**Investigación y aplicación de oficio:** Las causas que excluyen el delito **se investigarán y se harán valer en cualquier estado del procedimiento**, ya sea **de oficio** (por el Ministerio Público o el Juez) o a petición de parte interesada.`,
+          `**¿Qué causas abarca?** Incluye la ausencia de conducta, la atipicidad, las causas de justificación (como la **legítima defensa**, el estado de necesidad justificante o el cumplimiento de un deber) y las causas de inculpabilidad (como la inimputabilidad o el error invencible).`
+        ],
+        criterio: `Criterio práctico: Si actuaste en legítima defensa para repeler una agresión real, actual o inminente y sin derecho, la Fiscalía no debería esperar hasta el juicio oral para reconocerlo: el artículo 26 la obliga a investigarlo desde la carpeta de investigación para decretar el no ejercicio de la acción penal, o bien el Juez de Control puede dictar auto de no vinculación a proceso o sobreseimiento.`,
+        followUps: [
+          `¿Qué ocurre en la audiencia inicial del sistema oral?`,
+          `¿Cómo funciona el homicidio simple (Art. 125)?`,
+          `¿Qué penas aplican si hubo exceso o preterintención (Art. 79)?`
+        ]
+      },
+      {
+        id: `ambito_espacial`,
+        badge: `Arts. 1 y 2 · Ámbito Espacial y Vigencia`,
+        title: `¿Cuándo se aplica el Código Penal de Querétaro?`,
+        exactRefs: [`art 1`, `art 2`, `articulo 1`, `articulo 2`, `1987`, `2009`],
+        keywords: [`ambito espacial`, `territorio`, `competencia`, `otro estado`, `otra entidad`, `cuando aplica`, `vigencia`, `historia del codigo`, `expedicion`],
+        intro: `Los artículos 1 y 2 definen el alcance territorial de la ley penal queretana, mientras que su historia legislativa explica por qué sigue vigente el ordenamiento base de 1987:`,
+        bullets: [
+          `**Principio de territorialidad (Art. 1):** Este Código se aplica por los hechos delictivos realizados **en el territorio del Estado de Querétaro** que sean competencia de sus tribunales locales (fuero común).`,
+          `**Extraterritorialidad interestatal (Art. 2):** También se aplica a hechos **iniciados, preparados o cometidos en otra entidad federativa** cuando **produzcan o se pretenda que tengan efectos en Querétaro**, siempre que el imputado se encuentre en el Estado y no se haya ejercitado acción penal en su contra en aquella otra entidad.`,
+          `**Hito histórico (1987–2009):** El Código se publicó el 23 de julio de 1987 (en vigor el 23 de agosto). Aunque en octubre de 2009 se expidió un código nuevo, el 7 de diciembre de 2009 se dejó sin efectos y se restableció el Código de 1987 con todas sus reformas.`
+        ],
+        criterio: `Criterio práctico: Si un fraude o amenaza se planea o envía desde otro estado pero el daño patrimonial o efecto directo recae en Querétaro y el responsable es localizado aquí sin proceso abierto allá, los jueces de control de Querétaro tienen plena jurisdicción para conocer del caso.`,
+        followUps: [
+          `¿Qué reformas recientes tuvo el código en 2025 y 2026?`,
+          `¿Qué delitos sí son federales o fueron derogados (como extorsión en 2026)?`,
+          `¿Cómo funciona el sistema penal oral en Querétaro?`
+        ]
+      },
+      {
+        id: `animales`,
+        badge: `Arts. 246-D Bis, Quintus y Sextus · Protección Animal`,
+        title: `Delitos contra los animales y excepciones legales`,
+        exactRefs: [`246-d`, `246 d`, `246-d bis`, `246-d quintus`, `246-d sextus`],
+        keywords: [`animal`, `animales`, `perro`, `perros`, `gato`, `mascota`, `maltrato animal`, `crueldad animal`, `pelea de perros`, `peleas de perros`, `tauromaquia`, `toros`, `gallos`, `charreria`],
+        intro: `El Capítulo II del Título respectivo sanciona las conductas de crueldad contra animales domésticos o ferales, pero contempla una cláusula expresa de exclusión cultural en el artículo 246-D Sextus:`,
+        bullets: [
+          `**Maltrato o crueldad con lesiones (Art. 246-D Bis):** A quien dolosamente realice actos de maltrato contra animales domésticos o ferales provocándoles lesiones se le imponen de **3 a 15 meses de prisión** y de **100 a 200 días multa** (la pena se agrava si provoca la muerte o se utilizan métodos crueles).`,
+          `**Peleas de perros (Art. 246-D Quintus):** Se castiga con **1 a 4 años de prisión** y de **300 a 600 días multa** a quien organice, promueva, difunda, críe o permita peleas de perros.`,
+          `**Excepciones legales (Art. 246-D Sextus):** El propio Código establece que **no se consideran delitos contra los animales** la tauromaquia, la charrería, las peleas de gallos ni las prácticas vinculadas a fiestas tradicionales y usos y costumbres arraigados.`
+        ],
+        criterio: `Criterio práctico: Para denunciar maltrato a mascotas o peleas clandestinas de perros en Querétaro, es sumamente útil aportar videos, fotografías y dictamen veterinario de las lesiones; el delito aplica tanto a animales con dueño (domésticos) como a animales callejeros o abandonados (ferales).`,
+        followUps: [
+          `¿Cómo se calculan los días multa en UMA?`,
+          `¿Qué penas tienen las llamadas falsas de emergencia (Art. 229 Quáter)?`,
+          `¿Qué reformas recientes hubo en Querétaro?`
+        ],
+        basePenalty: { min: 0.25, max: 1.25, multaMin: 100, multaMax: 200 }
+      },
+      {
+        id: `seguridad_fe_publica`,
+        badge: `Arts. 218–235 Quáter · Seguridad Colectiva y Fe Pública`,
+        title: `Armas prohibidas, asociación delictuosa, saqueos, llamadas falsas e insignias`,
+        exactRefs: [`art 218`, `art 219`, `art 220`, `art 221`, `229 quater`, `art 230`, `235 quater`],
+        keywords: [`arma prohibida`, `armas prohibidas`, `navaja`, `incendio`, `explosion`, `asociacion delictuosa`, `banda`, `pandilla`, `saqueo`, `saqueos`, `apologia`, `llamada falsa`, `911`, `emergencia falsa`, `broma al 911`, `uniforme policial`, `insignia`, `patrulla clonada`, `sellos oficiales`],
+        intro: `Los Títulos relativos a la seguridad colectiva y la fe pública sancionan conductas que ponen en riesgo el orden social o usurpan funciones de seguridad:`,
+        bullets: [
+          `**Incendio o explosión con peligro común (Art. 218):** de **1 a 5 años de prisión**.`,
+          `**Portación o acopio de armas prohibidas (Art. 219):** de **3 meses a 2 años de prisión**, hasta **25 días multa** y decomiso del objeto.`,
+          `**Asociación delictuosa (Art. 220):** de **3 meses a 4 años de prisión** y de **300 a 500 días multa** por integrar de manera permanente una asociación o banda de **dos o más personas** organizada para delinquir.`,
+          `**Provocación y convocatoria a saqueos (Art. 221):** de **3 a 6 años de prisión** y de **500 a 1000 días multa** a quien convoque, organice o difunda por cualquier medio (incluyendo redes sociales) saqueos o actos violentos contra comercios, oficinas públicas u hospitales.`,
+          `**Llamadas falsas de emergencia (Art. 229 Quáter):** si el aviso falso a los servicios de emergencia provoca un accidente o daño, se agregan de **5 meses a 2 años de prisión** y de **500 a 1000 días multa** (se persigue de oficio).`,
+          `**Sellos oficiales (Art. 230) y vestimenta policial (Art. 235 Quáter):** falsificar sellos o llaves oficiales merece de **1 a 5 años**. Comercializar o distribuir sin autorización uniformes, insignias o equipo policial se castiga con **5 meses a 8 años de prisión**, de **30 a 300 UMA** y decomiso.`
+        ],
+        criterio: `Criterio práctico: Observa que en Querétaro la asociación delictuosa (Art. 220) se configura desde dos personas con vocación de permanencia para delinquir, y que difundir convocatorias a saqueos en grupos digitales (Art. 221) ya constituye un delito autónomo grave (3 a 6 años) aunque el saqueo sea contenido por la policía.`,
+        followUps: [
+          `¿Qué pena tiene el robo en local comercial (Art. 183 Quáter)?`,
+          `¿Cómo se castiga la violencia en estadios (Art. 134 Bis)?`,
+          `¿Qué sanción tiene mentir ante una autoridad (Art. 284)?`
+        ]
+      },
+      {
+        id: `corrupcion_lavado`,
+        badge: `Arts. 246-H, 259, 272, 273, 283 y 284 · Corrupción y Recursos Ilícitos`,
+        title: `Lavado de dinero local, corrupción, tráfico de influencias y falsedad`,
+        exactRefs: [`246-h`, `246 h`, `art 259`, `art 272`, `art 273`, `art 283`, `art 284`],
+        keywords: [`lavado de dinero`, `procedencia ilicita`, `recursos ilicitos`, `corrupcion`, `servidor publico`, `funcionario`, `soborno`, `cohecho`, `trafico de influencias`, `falsedad`, `mentir ante autoridad`, `declarar falso`, `encubrimiento`, `ocultacion`],
+        intro: `El Código Penal de Querétaro articula tipos penales de alta penalidad contra las operaciones financieras ilícitas, los hechos de corrupción y el engaño a las autoridades:`,
+        bullets: [
+          `**Operaciones con recursos de procedencia ilícita (Art. 246-H):** de **5 a 15 años de prisión** y de **1,000 a 5,000 UMA** de multa a quien adquiera, enajene, administre, custodie o transfiera recursos sabiendo que proceden de una actividad ilícita.`,
+          `**Hechos de corrupción (Art. 273) y Tráfico de influencias (Art. 272):** se sancionan con **5 a 15 años de prisión** y de **1,000 a 5,000 UMA** las conductas graves de corrupción; el tráfico de influencias castiga al servidor público que gestione ilícitamente negocios públicos para obtener beneficio económico.`,
+          `**Concepto penal de servidor público (Art. 259):** abarca a toda persona que desempeñe empleo, cargo o comisión de cualquier naturaleza en la administración pública estatal o municipal, organismos descentralizados, autónomos o en los poderes Legislativo y Judicial.`,
+          `**Adquisición u ocultación indebida (Art. 283):** de **6 meses a 6 años de prisión** y de **30 a 300 UMA**.`,
+          `**Falsedad ante autoridades (Art. 284):** de **3 meses a 3 años de prisión** y **hasta 50 UMA** a quien declare falsamente ante una autoridad en ejercicio de sus funciones.`
+        ],
+        criterio: `Criterio práctico: La falsedad ante autoridades (Art. 284) es un riesgo real para testigos o denunciantes que alteran hechos dolosamente ante la Fiscalía o un juez. En cambio, al imputado lo protege el derecho constitucional a guardar silencio y a la no autoincriminación.`,
+        followUps: [
+          `¿Qué penas aplican si se quebranta una medida cautelar (Art. 303)?`,
+          `¿Cómo se valoran las pruebas en el sistema oral de Querétaro?`,
+          `¿Qué artículos fueron invalidados por la SCJN?`
+        ],
+        basePenalty: { min: 5, max: 15, multaMin: 1000, multaMax: 5000 }
+      },
+      {
+        id: `victimas_217`,
+        badge: `Arts. 217 Bis y 217 Quáter · Protección a Víctimas`,
+        title: `Medidas de seguridad, auxilio a víctimas y quebrantamiento (Art. 303)`,
+        exactRefs: [`217 quater`, `217 bis`, `art 217`, `art 303`, `articulo 303`],
+        keywords: [`victima`, `victimas`, `medidas de proteccion`, `orden de restriccion`, `auxilio`, `proteccion a victimas`, `quebrantamiento`, `incumplir medida`, `medida cautelar`, `violencia familiar`, `amenaza`],
+        intro: `Cuando una persona sufre un delito o se encuentra en riesgo físico o psicológico en Querétaro, el Código Penal y el CNPP dotan a la Fiscalía y a los jueces de herramientas de protección inmediata y sancionan severamente su incumplimiento:`,
+        bullets: [
+          `**Seguridad y auxilio inmediato (Art. 217 Quáter):** La Fiscalía General del Estado de Querétaro **decretará o solicitará las medidas y providencias cautelares pertinentes** durante la investigación o el proceso para salvaguardar la integridad física y psíquica de las víctimas.`,
+          `**Reforma 2026 al Art. 217 Bis:** El 27 de febrero de 2026 (P.O. No. 19) se reformó el segundo párrafo del artículo 217 Bis para fortalecer el marco de protección en delitos contra la familia y la integridad.`,
+          `**Delito de quebrantamiento de medidas (Art. 303):** Al que **dolosamente quebrante** una pena no privativa de la libertad, una medida cautelar o una medida de protección impuesta por autoridad competente, se le impondrá de **1 a 5 años de prisión** y de **500 a 1,000 días multa**.`
+        ],
+        criterio: `Criterio práctico: Si cuentas con una orden o medida de protección emitida por un Fiscal o Juez y el agresor se acerca, te contacta o incumple la restricción, no es solo una falta administrativa: comete un nuevo delito autónomo (Art. 303) sancionado con hasta 5 años de prisión, por lo que debes reportarlo al 911 y a tu Fiscal de inmediato.`,
+        followUps: [
+          `¿Qué resolvió la SCJN sobre el artículo 303 en la AI 5/2021?`,
+          `¿Qué reformas hubo en 2025 y 2026 sobre acecho y abuso sexual?`,
+          `¿Cómo se exige la reparación del daño (Art. 35)?`
+        ],
+        basePenalty: { min: 1, max: 5, multaMin: 500, multaMax: 1000 }
+      },
+      {
+        id: `reformas_scjn`,
+        badge: `Reformas 2022–2026 y Control Constitucional SCJN`,
+        title: `Reformas recientes (2025–2026) y Acciones de Inconstitucionalidad`,
+        exactRefs: [`ai 88/2022`, `88/2022`, `ai 5/2021`, `5/2021`, `art 155`, `art 170`, `art 287`, `art 290`, `art 299`, `art 300`, `2025`, `2026`],
+        keywords: [`reforma`, `reformas`, `inconstitucionalidad`, `invalidez`, `scjn`, `suprema corte`, `acecho`, `stalking`, `redes sociales`, `niñez`, `extorsion`, `abuso sexual`, `sombra de arteaga`, `reciente`, `actualizacion`],
+        intro: `El Código Penal de Querétaro acumula **93 reformas** publicadas en el Periódico Oficial *La Sombra de Arteaga* hasta julio de 2026, además de importantes sentencias de control constitucional de la Suprema Corte:`,
+        bullets: [
+          `**Reformas de agosto a noviembre de 2025:** (1) Nueva reforma al **Art. 155** el 19 de agosto de 2025 (P.O. No. 67); (2) Reforma del 29 de agosto de 2025 (P.O. No. 72) para proteger el interés superior de niñas, niños y adolescentes en **redes sociales digitales**; y (3) Reforma del 7 de noviembre de 2025 (P.O. No. 90) que tipifica y regula conductas en materia de **acecho**.`,
+          `**Reformas de febrero a julio de 2026:** (1) El 23 de febrero de 2026 (P.O. No. 17) se **derogó el delito local de extorsión** del Código estatal (atendiendo a la redistribución competencial general); (2) El 27 de febrero de 2026 (P.O. No. 19) se reformó el segundo párrafo del **Art. 217 Bis**; y (3) El 15/17 de julio de 2026 (P.O. No. 58) entró en vigor la reforma en materia de **abuso sexual**.`,
+          `**Acción de Inconstitucionalidad 88/2022 (SCJN, 10 jun 2024):** Declaró la invalidez del Art. 155 que había sido reformado en mayo de 2022, lo que motivó la adecuación legislativa de agosto de 2025.`,
+          `**Acción de Inconstitucionalidad 5/2021 (P.O. 19 sep 2025):** La SCJN invalidó porciones normativas de los **artículos 170, 287, 290, 299, 300 y 303**, con **efectos retroactivos al 19 de diciembre de 2020** en beneficio de las personas procesadas o sentenciadas bajo esas porciones.`
+        ],
+        criterio: `Criterio práctico:En materia penal, las declaratorias de invalidez de la Suprema Corte tienen efectos retroactivos (Art. 105 constitucional). Si una persona fue vinculada o condenada desde diciembre de 2020 con base en las porciones invalidadas de los artículos 170, 287, 290, 299, 300 o 303, su defensa puede promover la modificación o anulación correspondiente.`,
+        followUps: [
+          `¿Qué sanciona actualmente el artículo 303 vigente?`,
+          `¿Qué dijo la SCJN en el Amparo Directo en Revisión 1630/2023?`,
+          `¿Cómo funciona el sistema oral en los juzgados de Querétaro?`
+        ]
+      },
+      {
+        id: `sistema_oral`,
+        badge: `Sistema Penal Acusatorio y Cultura Jurídica · Querétaro`,
+        title: `Audiencia inicial, audiencia intermedia y etnografía judicial`,
+        exactRefs: [`desacatos`, `cnpp`, `art 359`],
+        keywords: [`sistema oral`, `juicio oral`, `acusatorio`, `audiencia inicial`, `audiencia intermedia`, `dato de prueba`, `datos de prueba`, `medio de prueba`, `prueba`, `contradiccion`, `descubrimiento probatorio`, `expediente`, `cultura juridica`, `etnografia`, `juez de control`, `vinculacion a proceso`, `oculta entrevista`],
+        intro: `El funcionamiento real de los juzgados de oralidad penal en el Distrito Judicial de Querétaro (analizado en el estudio etnográfico de Córdova Esparza y Terven Salinas, *Desacatos 70*, junto con el CNPP) muestra contrastes clave entre la teoría procesal y la práctica cotidiana:`,
+        bullets: [
+          `**Dato de prueba vs. Prueba plena (Audiencia Inicial):** En la audiencia inicial (control de detención y vinculación a proceso), los registros de la carpeta de la Fiscalía son simples **«datos de prueba»**. Solo se convierten en **«prueba»** cuando se desahogan y someten a contradicción en la audiencia de juicio oral. Sin embargo, en la práctica local se ha observado la inercia de otorgar valor casi pleno a los datos de la fiscalía desde el inicio.`,
+          `**Exclusión probatoria por ocultamiento (Audiencia Intermedia):** Durante la fase intermedia, la Fiscalía debe entregar a la defensa todo el descubrimiento probatorio. En un caso documentado en Querétaro (22 de junio de 2017), la jueza de control **desechó una prueba testimonial de la fiscalía** porque esta omitió revelar a la defensa el contenido de la entrevista previa, protegiendo la igualdad procesal.`,
+          `**Cultura jurídica interna y el «expediente»:** Aunque el sistema es oral y público, persiste el peso simbólico del expediente escrito y filtros materiales de acceso a las salas que mantienen distancia frente al ciudadano común.`
+        ],
+        criterio: `Criterio práctico para audiencias: En audiencia inicial e intermedia, la defensa técnica no debe limitarse a formalismos: debe verificar que cada dato de prueba haya sido obtenido lícitamente y exigir en la etapa intermedia la exclusión de cualquier entrevista, peritaje o registro que la Fiscalía no haya descubierto íntegramente.`,
+        followUps: [
+          `¿Cómo se valoran los testigos de oídas según el ADR 1630/2023?`,
+          `¿Cómo se hacen valer las excluyentes del delito (Art. 26)?`,
+          `¿Qué medidas cautelares o de protección puede pedir la Fiscalía (Art. 217 Quáter)?`
+        ]
+      }
+    ];
+
+    // Glosario de orientación general para delitos frecuentes sobre los que el usuario puede preguntar en lenguaje coloquial
+    const GENERAL_CRIME_GUIDANCE = [
+      {
+        keys: [`fraude`, `estafa`, `estafaron`, `engano`, `enganaron`, `abuso de confianza`, `prestamo`, `pagare`, `dinero prestado`],
+        badge: `Orientación Patrimonial · Fraude y Abuso de Confianza`,
+        title: `Diferencia entre Fraude, Abuso de Confianza y Deuda Civil`,
+        intro: `En la práctica penal de Querétaro es muy común confundir un incumplimiento de contrato o préstamo con un delito patrimonial. El criterio jurídico para distinguirlos es el siguiente:`,
+        bullets: [
+          `**Fraude:** Se configura cuando alguien, **mediante el engaño** o aprovechándose del error en que se encuentra otra persona, se hace ilícitamente de alguna cosa o alcanza un lucro indebido desde el inicio de la operación.`,
+          `**Abuso de confianza:** Ocurre cuando a una persona se le entrega legítimamente la **tenencia** de un bien mueble (no el dominio o propiedad) para un fin específico y **dispone de él para sí o para otro** en perjuicio del titular.`,
+          `**Deuda meramente civil o mercantil:** Si prestaste dinero o firmaste un pagaré sin que existiera un engaño maquinado previo y el deudor simplemente dejó de pagar por insolvencia, la vía correcta es un juicio ejecutivo mercantil o civil, no penal (por prohibición del Art. 17 constitucional de prisión por deudas de carácter puramente civil).`
+        ],
+        criterio: `Criterio práctico: Si además del engaño o fraude en Querétaro el delito se cometió desde otro estado pero el perjuicio patrimonial ocurrió aquí (por ejemplo, transferencias o entregas en Querétaro), el artículo 2 del Código Penal permite que los tribunales queretanos asuman competencia.`,
+        followUps: [
+          `¿Cuándo aplica el Código Penal de Querétaro en hechos de otro estado (Art. 2)?`,
+          `¿Cómo exige la Fiscalía la reparación del daño (Art. 35)?`,
+          `¿Qué pena tiene el robo en local comercial (Art. 183 Quáter)?`
+        ]
+      },
+      {
+        keys: [`lesiones`, `golpe`, `golpearon`, `pelea`, `riña`, `herida`, `fractura`, `agresion fisica`],
+        badge: `Orientación Penal · Delito de Lesiones y Riña`,
+        title: `Lesiones y afectaciones a la integridad corporal`,
+        intro: `En el Código Penal de Querétaro (Título Primero del Libro Segundo), el delito de **lesiones** comprende cualquier daño o alteración en la salud producida por una causa externa, y su sanción se gradúa según la gravedad médica y la intencionalidad:`,
+        bullets: [
+          `**Clasificación médico-legal:** Las penas aumentan progresivamente dependiendo de si las lesiones tardan menos o más de 15 días en sanar, si ponen en peligro la vida, o si dejan cicatriz permanente notable, disminución de facultades o incapacidad.`,
+          `**Modalidades especiales reguladas en el catálogo:** Si las lesiones ocurren dentro o en las inmediaciones de un **evento deportivo o espectáculo** se actualiza también el **Art. 134 Bis** (2 a 6 años de prisión); si son contra una mujer con antecedentes de violencia, pueden constituir agravantes de género o tentativa de feminicidio (**Art. 126 Bis**); y si fueron imprudenciales (por ejemplo, un hecho vial), se rigen por el límite del **Art. 75** (hasta la mitad de la pena dolosa).`,
+          `**Protección inmediata:** La víctima tiene derecho a que la Fiscalía decrete medidas de protección urgentes (**Art. 217 Quáter**) y exija de oficio la reparación de gastos médicos y daño moral (**Art. 35**).`
+        ],
+        criterio: `Criterio práctico: Al acudir a denunciar lesiones ante la Fiscalía en Querétaro, el paso indispensable es la valoración inmediata por el médico legista para clasificar el tiempo de sanidad y el riesgo vital, además de solicitar providencias precautorias del artículo 217 Quáter si conoces al agresor.`,
+        followUps: [
+          `¿Qué medidas de protección prevé el Art. 217 Quáter para víctimas?`,
+          `¿Cómo se castiga la violencia en estadios y espectáculos (Art. 134 Bis)?`,
+          `¿Qué pasa si las lesiones fueron en legítima defensa (Art. 26)?`
+        ]
+      }
+    ];
+
+    let appState = {
+      activeCategory: `todos`,
+      searchQuery: ``,
+      bookmarks: [],
+      simBase: `homicidio`,
+      simMode: `doloso`,
+      simDays: 30,
+      oralStage: 0,
+      chatOpen: false,
+      lastTopicId: null,
+      messages: []
+    };
+
+    const INITIAL_BOT_MESSAGE = {
+      role: `bot`,
+      badge: `Asistente Jurídico Activo`,
+      text: `¡Hola! Soy tu compañero legal especializado en el Código Penal para el Estado de Querétaro (actualizado a 2026) y en el sistema penal acusatorio y oral. Puedes preguntarme por un artículo, un delito o contarme un caso práctico con tus propias palabras (por ejemplo: «asaltaron mi tienda», «¿qué pasa en un accidente sin intención?» o «¿cómo funcionan los testigos de oídas?»).`,
+      suggestions: [
+        `Pena por feminicidio (Art. 126 Bis)`,
+        `Asaltaron mi negocio, ¿qué procede?`,
+        `Testigos de oídas (ADR 1630/2023)`,
+        `Reformas 2025–2026 en Querétaro`
+      ]
+    };
+
+    // Persistence helper (supports both host API and localStorage for GitHub Pages)
+    async function persistState() {
+      const payload = {
+        bookmarks: appState.bookmarks,
+        messages: appState.messages.slice(-24),
+        simBase: appState.simBase,
+        simMode: appState.simMode,
+        simDays: appState.simDays,
+        lastTopicId: appState.lastTopicId
+      };
+      try {
+        localStorage.setItem(`companero_legal_qro_state_v2`, JSON.stringify(payload));
+      } catch (e) {}
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState(payload);
+        }
+      } catch (e) {}
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    // Format bold markdown (**text**) safely after HTML escaping
+    function formatRichText(str) {
+      return escapeHtml(str).replace(/\*\*(.+?)\*\*/g, `<strong>$1</strong>`);
+    }
+
+    function formatYears(val) {
+      if (val < 1) {
+        const months = Math.round(val * 12);
+        return months + (months === 1 ? ` mes` : ` meses`);
+      }
+      const rounded = Math.round(val * 10) / 10;
+      const whole = Math.floor(rounded);
+      const frac = rounded - whole;
+      if (Math.abs(frac) < 0.05) {
+        return whole + (whole === 1 ? ` año` : ` años`);
+      }
+      const extraMonths = Math.round(frac * 12);
+      return whole + (whole === 1 ? ` año ` : ` años `) + extraMonths + (extraMonths === 1 ? ` mes` : ` meses`);
+    }
+
+    // Render Articles Grid
+    function renderArticles() {
+      const grid = document.getElementById(`articles-grid`);
+      if (!grid) return;
+
+      const q = normalizeText(appState.searchQuery.trim());
+      const filtered = ARTICLES_DATA.filter((item) => {
+        const matchesCat = appState.activeCategory === `todos` || item.category === appState.activeCategory;
+        if (!matchesCat) return false;
+        if (!q) return true;
+        const haystack = normalizeText(`${item.article} ${item.title} ${item.tag} ${item.penalty} ${item.summary}`);
+        return haystack.includes(q);
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <h3>Sin coincidencias directas en las tarjetas</h3>
+            <p style="margin: var(--space-sm) auto var(--space-md); max-width: 48ch; color: var(--on-surface-variant);">
+              No encontramos tarjetas con «${escapeHtml(appState.searchQuery)}», pero puedes consultarlo directamente con el compañero legal para recibir orientación con criterio jurídico.
+            </p>
+            <button type="button" class="btn-primary" onclick="askPresetQuestion(appState.searchQuery || '¿Qué temas cubre este asistente?')">
+              Consultar «${escapeHtml(appState.searchQuery)}» en el chat
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((item) => {
+        const isSaved = appState.bookmarks.includes(item.id);
+        return `
+          <article class="tile interactive article-card">
+            <div>
+              <div class="article-meta">
+                <span class="article-tag ${item.isReform ? `reform` : ``}">${escapeHtml(item.article)} · ${escapeHtml(item.tag)}</span>
+                <button
+                  type="button"
+                  class="bookmark-btn"
+                  aria-pressed="${isSaved ? `true` : `false`}"
+                  aria-label="${isSaved ? `Quitar de guardados` : `Guardar artículo`}"
+                  title="${isSaved ? `Quitar de guardados` : `Guardar artículo`}"
+                  onclick="toggleBookmark('${item.id}')"
+                >
+                  <i data-lucide="bookmark" width="18" height="18" aria-hidden="true"></i>
+                </button>
+              </div>
+              <h3 style="margin-top: var(--space-sm);">${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.summary)}</p>
+            </div>
+            <div>
+              <div class="penalty-box">${escapeHtml(item.penalty)}</div>
+              <div class="card-actions">
+                <button type="button" class="link-more" onclick="askPresetQuestion(getPromptById('${item.id}'))">
+                  Consultar al asistente
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join(``);
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function getPromptById(id) {
+      const found = ARTICLES_DATA.find((a) => a.id === id);
+      return found ? found.prompt : `Explícame este artículo del Código Penal de Querétaro.`;
+    }
+
+    function handleArticleSearch(val) {
+      appState.searchQuery = val;
+      renderArticles();
+    }
+
+    function setCategoryFilter(cat, btn) {
+      appState.activeCategory = cat;
+      const buttons = document.querySelectorAll(`.filter-pill[data-cat]`);
+      buttons.forEach((b) => b.setAttribute(`aria-pressed`, b === btn ? `true` : `false`));
+      renderArticles();
+    }
+
+    function resetExplorerFilters() {
+      appState.activeCategory = `todos`;
+      appState.searchQuery = ``;
+      const searchEl = document.getElementById(`search-articles`);
+      if (searchEl) searchEl.value = ``;
+      const buttons = document.querySelectorAll(`.filter-pill[data-cat]`);
+      buttons.forEach((b) => b.setAttribute(`aria-pressed`, b.dataset.cat === `todos` ? `true` : `false`));
+      renderArticles();
+    }
+
+    function toggleBookmark(id) {
+      const idx = appState.bookmarks.indexOf(id);
+      if (idx === -1) {
+        appState.bookmarks.push(id);
+      } else {
+        appState.bookmarks.splice(idx, 1);
+      }
+      renderArticles();
+      renderBookmarks();
+      persistState();
+    }
+
+    function renderBookmarks() {
+      const drawer = document.getElementById(`saved-drawer`);
+      const list = document.getElementById(`saved-list`);
+      if (!drawer || !list) return;
+
+      if (appState.bookmarks.length === 0) {
+        drawer.hidden = true;
+        list.innerHTML = ``;
+        return;
+      }
+
+      drawer.hidden = false;
+      list.innerHTML = appState.bookmarks.map((id) => {
+        const item = ARTICLES_DATA.find((a) => a.id === id);
+        if (!item) return ``;
+        return `
+          <button type="button" class="chip" onclick="askPresetQuestion(getPromptById('${item.id}'))">
+            ${escapeHtml(item.article)}: ${escapeHtml(item.title)}
+          </button>
+        `;
+      }).join(``);
+    }
+
+    function clearBookmarks(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Confirmar vaciado`;
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Vaciar guardados`;
+      appState.bookmarks = [];
+      renderArticles();
+      renderBookmarks();
+      persistState();
+    }
+
+    // Simulator functions
+    function setSimBase(baseKey, btn) {
+      appState.simBase = baseKey;
+      const group = btn ? btn.parentElement : null;
+      if (group) {
+        group.querySelectorAll(`.seg-btn`).forEach((b) => b.setAttribute(`aria-pressed`, b === btn ? `true` : `false`));
+      }
+      updateSimulator();
+      persistState();
+    }
+
+    function setSimMode(modeKey, btn) {
+      appState.simMode = modeKey;
+      const group = btn ? btn.parentElement : null;
+      if (group) {
+        group.querySelectorAll(`.seg-btn`).forEach((b) => b.setAttribute(`aria-pressed`, b === btn ? `true` : `false`));
+      }
+      updateSimulator();
+      persistState();
+    }
+
+    function syncSimDaysFromSlider(val) {
+      const num = Math.max(1, Math.min(365, parseInt(val, 10) || 1));
+      appState.simDays = num;
+      const inputEl = document.getElementById(`input-days`);
+      if (inputEl) inputEl.value = num;
+      updateSimulator();
+      persistState();
+    }
+
+    function syncSimDaysFromNumber(val) {
+      const num = Math.max(1, Math.min(365, parseInt(val, 10) || 1));
+      appState.simDays = num;
+      const sliderEl = document.getElementById(`slider-days`);
+      if (sliderEl) sliderEl.value = num;
+      updateSimulator();
+      persistState();
+    }
+
+    function updateSimulator() {
+      const base = SIM_BASES[appState.simBase] || SIM_BASES.homicidio;
+      const ruleLabel = document.getElementById(`sim-rule-label`);
+      const rangeText = document.getElementById(`sim-range-text`);
+      const barFill = document.getElementById(`sim-bar-fill`);
+      const expText = document.getElementById(`sim-explanation`);
+      const eqText = document.getElementById(`sim-multa-eq`);
+      if (!ruleLabel || !rangeText || !barFill || !expText || !eqText) return;
+
+      let minY = base.min;
+      let maxY = base.max;
+      let label = `Rango legal aplicable (Consumado doloso)`;
+      let explanation = `${base.name} contempla de ${formatYears(base.min)} a ${formatYears(base.max)} de prisión y ${base.multas}.`;
+
+      if (appState.simMode === `preter`) {
+        minY = 0.25;
+        maxY = base.max * 0.75;
+        label = `Rango por delito preterintencional (Art. 79)`;
+        explanation = `El Art. 79 aplica de 3 meses hasta las tres cuartas partes (3/4) de la pena que correspondería al delito doloso (${formatYears(maxY)} máximo para ${base.name}). Las demás penas se aplican hasta 2/3 partes.`;
+      } else if (appState.simMode === `culposo`) {
+        minY = 3 / 365;
+        maxY = Math.min(7, base.max * 0.5);
+        label = `Rango por delito culposo (Art. 75)`;
+        explanation = `El Art. 75 fija de 3 días a 7 años de prisión y de 3 a 90 días multa, sin exceder la mitad de la pena del delito doloso (${formatYears(maxY)} para este supuesto).`;
+      } else if (appState.simMode === `tentativa`) {
+        minY = 0.25;
+        maxY = 5;
+        label = `Tentativa sin daño determinable (Art. 74)`;
+        explanation = `Cuando en tentativa no sea posible determinar el daño que se pretendió causar, el Art. 74 establece de 3 meses a 5 años de prisión y hasta 50 días multa, según proceda.`;
+      }
+
+      const pct = Math.min(100, Math.max(8, Math.round((maxY / 15) * 100)));
+      ruleLabel.textContent = label;
+      rangeText.textContent = appState.simMode === `culposo`
+        ? `3 días a ${formatYears(maxY)}`
+        : `${formatYears(minY)} a ${formatYears(maxY)}`;
+      barFill.style.width = `${pct}%`;
+      expText.textContent = explanation;
+      eqText.textContent = `Equivalencia Art. 29: ${appState.simDays} ${appState.simDays === 1 ? `día` : `días`} de prisión equivalen a ${appState.simDays} ${appState.simDays === 1 ? `día` : `días`} multa sustitutiva.`;
+    }
+
+    // Oral Stage Switcher
+    function selectOralStage(index, btn) {
+      appState.oralStage = index;
+      const tabs = document.querySelectorAll(`.stage-tabs [role="tab"]`);
+      tabs.forEach((t, i) => {
+        t.setAttribute(`aria-selected`, i === index ? `true` : `false`);
+        t.setAttribute(`aria-pressed`, i === index ? `true` : `false`);
+      });
+      renderOralStage();
+    }
+
+    function renderOralStage() {
+      const panel = document.getElementById(`oral-stage-panel`);
+      if (!panel) return;
+      const s = ORAL_STAGES[appState.oralStage] || ORAL_STAGES[0];
+      panel.innerHTML = `
+        <div>
+          <span class="eyebrow">${escapeHtml(s.badge)}</span>
+          <h3>${escapeHtml(s.title)}</h3>
+          <p>${escapeHtml(s.desc)}</p>
+          <ul class="stage-list">
+            ${s.bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join(``)}
+          </ul>
+          <div style="margin-top: var(--space-lg);">
+            <button type="button" class="btn-primary" onclick="askPresetQuestion(getOralPrompt(${appState.oralStage}))">
+              Profundizar con el compañero legal
+            </button>
+          </div>
+        </div>
+        <div class="stage-callout">
+          <div class="field-label" style="color: var(--primary); margin-bottom: var(--space-xs);">Punto clave</div>
+          <h3 style="margin-top: 0;">${escapeHtml(s.calloutTitle)}</h3>
+          <p>${escapeHtml(s.calloutText)}</p>
+        </div>
+      `;
+    }
+
+    function getOralPrompt(idx) {
+      const s = ORAL_STAGES[idx];
+      return s ? s.prompt : `Explícame cómo opera el sistema oral en Querétaro.`;
+    }
+
+    // =========================================================================
+    // MOTOR INTELIGENTE DE RESPUESTA CON CRITERIO JURÍDICO Y CONTEXTO
+    // =========================================================================
+    function normalizeText(text) {
+      return String(text || ``)
+        .toLowerCase()
+        .normalize(`NFD`)
+        .replace(/[\u0300-\u036f]/g, ``)
+        .replace(/[¿?¡!.,;:()"]/g, ` `)
+        .replace(/\s+/g, ` `)
+        .trim();
+    }
+
+    function generateLegalResponse(rawQuery) {
+      const q = normalizeText(rawQuery);
+      const words = q.split(` `).filter(Boolean);
+
+      // 1. Detectar saludos, agradecimientos o conversación social natural
+      const greetings = [`hola`, `buenos dias`, `buenas tardes`, `buenas noches`, `que tal`, `hey`, `saludos`];
+      const thanks = [`gracias`, `muchas gracias`, `te agradezco`, `excelente`, `perfecto`, `muy claro`, `entendido`, `genial`];
+      const identity = [`quien eres`, `que eres`, `como funcionas`, `que puedes hacer`, `ayuda`, `para que sirves`, `temas`];
+
+      if (words.length <= 5 && greetings.some((g) => q === g || q.startsWith(g + ` `))) {
+        return {
+          badge: `Compañero Legal · En línea`,
+          text: `¡Hola! Qué gusto saludarte. Estoy listo para orientarte sobre el **Código Penal para el Estado de Querétaro** (incluyendo sus reformas hasta 2026) y criterios del **sistema penal acusatorio y oral**. ¿Tienes duda sobre algún delito en particular, el cálculo de una pena o quieres plantearme un caso práctico?`,
+          bullets: [
+            `**Delitos frecuentes:** Feminicidio (Art. 126 Bis), Homicidio (Art. 125), Robo en comercio o bienes públicos (Arts. 183 Quáter y Quinquies), Maltrato animal (Art. 246-D), Violencia en estadios (Art. 134 Bis), Corrupción y Lavado (Arts. 246-H y 273).`,
+            `**Reglas y defensas:** Legítima defensa y excluyentes (Art. 26), tentativa (Art. 74), accidentes culposos (Art. 75), multas en UMA (Art. 34) y medidas de protección a víctimas (Art. 217 Quáter).`
+          ],
+          criterio: `Consejo: Puedes preguntarme de forma directa («¿qué dice el Art. 126 Bis?») o platicarme una situación («me robaron en mi local», «tuve un accidente sin intención»).`,
+          suggestions: [
+            `¿Qué pena tiene el feminicidio (Art. 126 Bis)?`,
+            `Asaltaron mi negocio, ¿qué procede?`,
+            `¿Cómo funcionan los testigos de oídas?`,
+            `¿Qué reformas hubo en 2025 y 2026?`
+          ]
+        };
+      }
+
+      if (words.length <= 6 && thanks.some((t) => q.includes(t))) {
+        return {
+          badge: `Compañero Legal · Querétaro`,
+          text: `¡Con todo gusto! Me alegra que la orientación te sea útil. Recuerda que si quieres explorar algún otro supuesto (por ejemplo, cómo cambiaría la pena si fuera en tentativa o imprudencial, o cómo presentar la denuncia en Querétaro), aquí sigo para ayudarte.`,
+          suggestions: [
+            `¿Cómo se calcula la tentativa o el delito culposo?`,
+            `¿Cómo exige la Fiscalía la reparación del daño (Art. 35)?`,
+            `¿Qué pasa si la fiscalía oculta pruebas en audiencia intermedia?`
+          ]
+        };
+      }
+
+      if (identity.some((id) => q.includes(id)) && words.length <= 8) {
+        return {
+          badge: `Capacidades del Asistente`,
+          text: `Soy un asistente jurídico especializado en el **Código Penal para el Estado de Querétaro** y en la práctica de sus **juzgados de oralidad penal**. Mi criterio combina tres pilares:`,
+          bullets: [
+            `**Normativa estatal vigente (1987–2026):** Libro Primero (ámbito territorial, excluyentes, penas en UMA, tentativa, culpa, preterintención) y Libro Segundo (delitos contra la vida, patrimonio, seguridad colectiva, animales, fe pública y corrupción), incluyendo las **93 reformas hasta julio de 2026**.`,
+            `**Jurisprudencia de la SCJN:** Criterios vinculantes como el **Amparo Directo en Revisión 1630/2023** (testigos de oídas y violencia económica en feminicidio) y las **Acciones de Inconstitucionalidad 88/2022 y 5/2021**.`,
+            `**Práctica del sistema oral en Querétaro:** Diferencia entre dato de prueba y prueba, exclusión probatoria en audiencia intermedia y cultura jurídica local.`
+          ],
+          criterio: `Criterio orientador: Siempre te responderé distinguiendo qué dice exactamente el artículo, cómo se aplica en la vida real y qué matices procesales debes tomar en cuenta.`,
+          suggestions: [
+            `Explícame las reformas de 2025 y 2026`,
+            `¿Cómo se valoran los testigos de oídas (ADR 1630/2023)?`,
+            `¿Qué son las causas excluyentes del delito (Art. 26)?`
+          ]
+        };
+      }
+
+      // 2. Detectar preguntas de seguimiento contextuales (cuando hay un tema previo activo)
+      const prevNode = appState.lastTopicId ? KNOWLEDGE_NODES.find((n) => n.id === appState.lastTopicId) : null;
+      const isShortFollowUp = prevNode && (
+        q.startsWith(`y si `) ||
+        q.startsWith(`pero si `) ||
+        q.startsWith(`que pasa si `) ||
+        q.includes(`en ese caso`) ||
+        q.includes(`ese delito`) ||
+        (words.length <= 8 && (q.includes(`sin querer`) || q.includes(`accidente`) || q.includes(`intento`) || q.includes(`tentativa`) || q.includes(`pesos`) || q.includes(`dinero`) || q.includes(`multa`)))
+      );
+
+      if (isShortFollowUp && prevNode && prevNode.basePenalty) {
+        if (q.includes(`sin querer`) || q.includes(`accidente`) || q.includes(`culpos`) || q.includes(`imprudencia`)) {
+          const maxCulposo = Math.min(7, prevNode.basePenalty.max * 0.5);
+          return {
+            badge: `Seguimiento contextual · ${prevNode.title} + Art. 75`,
+            text: `Tomando en cuenta que estábamos hablando de **${prevNode.title}** (cuya pena dolosa llega hasta ${prevNode.basePenalty.max} años), si el hecho ocurrió **sin intención (de forma culposa o imprudencial)** se aplica la regla del **artículo 75** del Código Penal de Querétaro:`,
+            bullets: [
+              `**Reducción drástica de la pena:** En delitos culposos la prisión es de **3 días a 7 años** y de **3 a 90 días multa**, sin que jamás pueda exceder de la mitad de la pena dolosa (en este caso, máximo **${formatYears(maxCulposo)}**).`,
+              `**Nota de tipicidad:** Recuerda que solo admiten modalidad culposa aquellos delitos que por su naturaleza pueden cometerse por imprudencia (como el homicidio, las lesiones o los daños); delitos que exigen un ánimo específico (como el robo o el feminicidio por razones de género) son eminentemente dolosos.`
+            ],
+            criterio: `Criterio práctico: Si el hecho fue un accidente fortuito donde ni siquiera hubo imprudencia o descuido previsible, se actualiza una excluyente del delito conforme al artículo 26, que debe investigarse de oficio.`,
+            suggestions: prevNode.followUps
+          };
+        }
+        if (q.includes(`intento`) || q.includes(`tentativa`) || q.includes(`no pudo`) || q.includes(`no logro`) || q.includes(`frustrado`)) {
+          return {
+            badge: `Seguimiento contextual · ${prevNode.title} + Art. 74`,
+            text: `En relación con **${prevNode.title}**, si el sujeto realizó los actos ejecutivos pero **el delito no llegó a consumarse** por causas ajenas a su voluntad, estamos ante una **tentativa punible**:`,
+            bullets: [
+              `**Punibilidad atenuada:** La sanción es menor a la del delito consumado (${prevNode.basePenalty.min} a ${prevNode.basePenalty.max} años) y el juez la gradúa según el grado de puesta en peligro del bien jurídico.`,
+              `**Regla especial del Art. 74:** Si en la tentativa no fuera posible determinar con certeza cuál era el daño específico que se pretendía causar, la pena aplicable será de **3 meses a 5 años de prisión** y **hasta 50 días multa**.`
+            ],
+            criterio: `Criterio práctico: Si el autor desistió espontáneamente y por su propia voluntad antes de causar daño, no se castiga la tentativa, sino únicamente los actos que por sí mismos constituyan delito.`,
+            suggestions: prevNode.followUps
+          };
+        }
+        if (q.includes(`pesos`) || q.includes(`dinero`) || q.includes(`uma`) || q.includes(`cuanto es la multa`)) {
+          const umaApprox = 113.14;
+          const minMxn = Math.round(prevNode.basePenalty.multaMin * umaApprox).toLocaleString(`es-MX`);
+          const maxMxn = Math.round(prevNode.basePenalty.multaMax * umaApprox).toLocaleString(`es-MX`);
+          return {
+            badge: `Cálculo en UMA · ${prevNode.title}`,
+            text: `Para **${prevNode.title}**, el Código prevé una multa de **${prevNode.basePenalty.multaMin} a ${prevNode.basePenalty.multaMax} días multa (UMA)**.`,
+            bullets: [
+              `**Conversión orientativa a pesos:** Conforme al Decreto de desindexación del 1 de septiembre de 2017, cada día multa equivale a una **UMA diaria** vigente al momento del delito. Tomando un valor referencial de ~$113.14 MXN por UMA, el rango equivale aproximadamente a **$${minMxn} a $${maxMxn} MXN**.`,
+              `**Sustitución (Art. 29):** En los casos de penas bajas donde la ley permite sustituir prisión por multa, cada día de prisión equivale a **1 día multa** (1 UMA).`
+            ],
+            criterio: `Criterio práctico: La multa se paga al Fondo correspondiente del Estado, pero es independiente de la **reparación del daño (Art. 35)**, la cual se paga directamente a la víctima por el perjuicio real sufrido.`,
+            suggestions: prevNode.followUps
+          };
+        }
+      }
+
+      // 3. Evaluar coincidencias con los nodos del Código Penal y Jurisprudencia
+      const scoredNodes = KNOWLEDGE_NODES.map((node) => {
+        let score = 0;
+        node.exactRefs.forEach((ref) => {
+          if (q.includes(normalizeText(ref))) score += 18;
+        });
+        node.keywords.forEach((kw) => {
+          const nkw = normalizeText(kw);
+          if (q.includes(nkw)) {
+            score += nkw.includes(` `) ? 9 : 6;
+          }
+        });
+        return { node, score };
+      }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score);
+
+      // Revisar también orientación general de delitos coloquiales (fraude, lesiones, etc.)
+      const scoredGeneral = GENERAL_CRIME_GUIDANCE.map((g) => {
+        let score = 0;
+        g.keys.forEach((k) => {
+          if (q.includes(normalizeText(k))) score += 8;
+        });
+        return { g, score };
+      }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score);
+
+      if (scoredGeneral.length > 0 && (scoredNodes.length === 0 || scoredGeneral[0].score > scoredNodes[0].score)) {
+        const bestG = scoredGeneral[0].g;
+        return {
+          badge: bestG.badge,
+          text: bestG.intro,
+          bullets: bestG.bullets,
+          criterio: bestG.criterio,
+          suggestions: bestG.followUps
+        };
+      }
+
+      if (scoredNodes.length > 0) {
+        const primary = scoredNodes[0].node;
+        appState.lastTopicId = primary.id;
+
+        // Si la consulta combina dos temas con puntaje alto (ej. "robo en tentativa" o "feminicidio y testigos de oídas"), integramos ambos con criterio
+        if (scoredNodes.length > 1 && scoredNodes[1].score >= 8 && scoredNodes[1].node.id !== primary.id) {
+          const secondary = scoredNodes[1].node;
+          const combinedBullets = [
+            ...primary.bullets.slice(0, 2),
+            ...secondary.bullets.slice(0, 2)
+          ];
+          return {
+            badge: `${primary.badge.split(`·`)[0].trim()} + ${secondary.badge.split(`·`)[0].trim()}`,
+            text: `Tu consulta involucra dos aspectos conectados en el Derecho Penal de Querétaro (**${primary.title}** y **${secondary.title}**). Aquí tienes el análisis integrado:`,
+            bullets: combinedBullets,
+            criterio: `${primary.criterio}`,
+            suggestions: primary.followUps
+          };
+        }
+
+        return {
+          badge: primary.badge,
+          text: primary.intro,
+          bullets: primary.bullets,
+          criterio: primary.criterio,
+          suggestions: primary.followUps
+        };
+      }
+
+      // 4. Respuesta con criterio jurídico general cuando preguntan algo fuera de los artículos indexados
+      return {
+        badge: `Criterio General · Orientación Penal Querétaro`,
+        text: `Analicé tu consulta («${rawQuery.trim()}»). Aunque no cita literalmente uno de los artículos específicos indexados en esta guía, como tu compañero legal te doy criterio práctico sobre cómo abordarlo en Querétaro:`,
+        bullets: [
+          `**1. Verifica tipicidad y excluyentes (Art. 26):** En materia penal rige la exacta aplicación de la ley; para que una conducta sea delito debe encuadrar en un tipo penal y no existir una causa de exclusión (como legítima defensa o falta de dolo, que se investigan de oficio).`,
+          `**2. Distingue si hubo dolo o imprudencia (Arts. 74 y 75):** Si el hecho fue un accidente sin intención, la pena jamás puede rebasar la mitad del delito doloso (Art. 75); si solo quedó en intento sin daño determinable, aplica de 3 meses a 5 años (Art. 74).`,
+          `**3. Protección y reparación si eres víctima (Arts. 35 y 217 Quáter):** Puedes acudir a cualquier Unidad de la Fiscalía General del Estado de Querétaro para solicitar medidas de protección inmediatas y exigir de oficio la reparación del daño.`
+        ],
+        criterio: `¿Sobre cuál de estas áreas del Código Penal de Querétaro se relaciona más tu duda para darte el artículo y rango de pena exactos?`,
+        suggestions: [
+          `Delitos contra la vida (Homicidio y Feminicidio)`,
+          `Robo en comercio, bienes públicos o fraude`,
+          `Reglas de tentativa, accidentes culposos y UMA`,
+          `Reformas 2025–2026 (acecho, abuso sexual, extorsión)`
+        ]
+      };
+    }
+
+    // Chat UI Management
+    function renderChatMessages(isTyping = false) {
+      const container = document.getElementById(`chat-messages`);
+      if (!container) return;
+
+      const list = appState.messages.length > 0 ? appState.messages : [INITIAL_BOT_MESSAGE];
+      let html = list.map((m) => {
+        if (m.role === `user`) {
+          return `<div class="msg user">${escapeHtml(m.text)}</div>`;
+        }
+        const badgeHtml = m.badge ? `<span class="msg-badge">${escapeHtml(m.badge)}</span>` : ``;
+        const introHtml = `<p class="msg-intro">${formatRichText(m.text)}</p>`;
+        const bulletsHtml = Array.isArray(m.bullets) && m.bullets.length > 0
+          ? `<ul>${m.bullets.map((b) => `<li>${formatRichText(b)}</li>`).join(``)}</ul>`
+          : ``;
+        const criterioHtml = m.criterio
+          ? `<div class="msg-criterio">${formatRichText(m.criterio)}</div>`
+          : ``;
+        const suggestionsHtml = Array.isArray(m.suggestions) && m.suggestions.length > 0
+          ? `<div class="msg-suggestions">${m.suggestions.map((s) => `<button type="button" class="msg-suggestion-btn" onclick="submitQueryText(this.textContent)">${escapeHtml(s)}</button>`).join(``)}</div>`
+          : ``;
+        return `<div class="msg bot">${badgeHtml}${introHtml}${bulletsHtml}${criterioHtml}${suggestionsHtml}</div>`;
+      }).join(``);
+
+      if (isTyping) {
+        html += `
+          <div class="msg bot" aria-label="El asistente está redactando su respuesta">
+            <div class="typing-dots"><span></span><span></span><span></span></div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function openChatWidget() {
+      appState.chatOpen = true;
+      const panel = document.getElementById(`chat-panel`);
+      const fab = document.getElementById(`chat-fab`);
+      const tooltip = document.getElementById(`chat-tooltip`);
+      const input = document.getElementById(`chat-input`);
+      if (panel) panel.classList.remove(`hidden`);
+      if (fab) fab.setAttribute(`aria-expanded`, `true`);
+      if (tooltip) tooltip.style.display = `none`;
+      renderChatMessages();
+      if (input) setTimeout(() => input.focus(), 60);
+    }
+
+    function closeChatWidget() {
+      appState.chatOpen = false;
+      const panel = document.getElementById(`chat-panel`);
+      const fab = document.getElementById(`chat-fab`);
+      const tooltip = document.getElementById(`chat-tooltip`);
+      if (panel) panel.classList.add(`hidden`);
+      if (fab) fab.setAttribute(`aria-expanded`, `false`);
+      if (tooltip) tooltip.style.display = ``;
+    }
+
+    function toggleChatWidget() {
+      if (appState.chatOpen) {
+        closeChatWidget();
+      } else {
+        openChatWidget();
+      }
+    }
+
+    function handleTooltipKey(event) {
+      if (event.key === `Enter` || event.key === ` `) {
+        event.preventDefault();
+        toggleChatWidget();
+      }
+    }
+
+    let typingTimer = null;
+    function submitQueryText(text) {
+      const clean = String(text || ``).trim();
+      if (!clean) return;
+      if (appState.messages.length === 0) {
+        appState.messages.push(INITIAL_BOT_MESSAGE);
+      }
+      appState.messages.push({ role: `user`, text: clean });
+      renderChatMessages(true);
+
+      if (typingTimer) clearTimeout(typingTimer);
+      typingTimer = setTimeout(() => {
+        const reply = generateLegalResponse(clean);
+        appState.messages.push({
+          role: `bot`,
+          badge: reply.badge,
+          text: reply.text,
+          bullets: reply.bullets,
+          criterio: reply.criterio,
+          suggestions: reply.suggestions
+        });
+        renderChatMessages(false);
+        persistState();
+      }, 240);
+    }
+
+    function handleChatSubmit(event) {
+      event.preventDefault();
+      const input = document.getElementById(`chat-input`);
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) return;
+      input.value = ``;
+      submitQueryText(val);
+    }
+
+    function askPresetQuestion(question) {
+      openChatWidget();
+      submitQueryText(question);
+    }
+
+    function handleClearChat(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `¿Confirmar?`;
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Reiniciar`;
+      appState.messages = [];
+      appState.lastTopicId = null;
+      renderChatMessages();
+      persistState();
+    }
+
+    // IntersectionObserver for smooth Showroom scroll reveals
+    function initScrollReveals() {
+      const items = document.querySelectorAll(`.reveal`);
+      if (!(`IntersectionObserver` in window)) {
+        items.forEach((el) => el.classList.add(`visible`));
+        return;
+      }
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(`visible`);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      items.forEach((el) => obs.observe(el));
+    }
+
+    // Initialize App
+    async function initApp() {
+      try {
+        const localRaw = localStorage.getItem(`companero_legal_qro_state_v2`);
+        if (localRaw) {
+          const parsed = JSON.parse(localRaw);
+          if (parsed && typeof parsed === `object`) {
+            if (Array.isArray(parsed.bookmarks)) appState.bookmarks = parsed.bookmarks;
+            if (Array.isArray(parsed.messages)) appState.messages = parsed.messages;
+            if (parsed.simBase && SIM_BASES[parsed.simBase]) appState.simBase = parsed.simBase;
+            if (parsed.simMode) appState.simMode = parsed.simMode;
+            if (typeof parsed.simDays === `number`) appState.simDays = parsed.simDays;
+            if (parsed.lastTopicId) appState.lastTopicId = parsed.lastTopicId;
+          }
+        }
+      } catch (e) {}
+
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            if (Array.isArray(saved.bookmarks)) appState.bookmarks = saved.bookmarks;
+            if (Array.isArray(saved.messages)) appState.messages = saved.messages;
+            if (saved.simBase && SIM_BASES[saved.simBase]) appState.simBase = saved.simBase;
+            if (saved.simMode) appState.simMode = saved.simMode;
+            if (typeof saved.simDays === `number`) appState.simDays = saved.simDays;
+            if (saved.lastTopicId) appState.lastTopicId = saved.lastTopicId;
+          }
+        }
+      } catch (e) {}
+
+      const sliderEl = document.getElementById(`slider-days`);
+      const inputEl = document.getElementById(`input-days`);
+      if (sliderEl) sliderEl.value = appState.simDays;
+      if (inputEl) inputEl.value = appState.simDays;
+      document.querySelectorAll(`[data-sim-base]`).forEach((b) => {
+        b.setAttribute(`aria-pressed`, b.dataset.simBase === appState.simBase ? `true` : `false`);
+      });
+      document.querySelectorAll(`[data-sim-mode]`).forEach((b) => {
+        b.setAttribute(`aria-pressed`, b.dataset.simMode === appState.simMode ? `true` : `false`);
+      });
+
+      document.addEventListener(`keydown`, (ev) => {
+        if (ev.key === `Escape` && appState.chatOpen) {
+          closeChatWidget();
+        }
+      });
+
+      renderArticles();
+      renderBookmarks();
+      updateSimulator();
+      renderOralStage();
+      renderChatMessages();
+      initScrollReveals();
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
