@@ -119,6 +119,22 @@
       font-size: var(--body-size);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    /* Static Watermark Background (Universidad Humanitas) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(180deg, rgba(251, 251, 253, 0.78) 0%, rgba(251, 251, 253, 0.74) 50%, rgba(251, 251, 253, 0.80) 100%),
+        url("humanitas-bg.webp");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      transform: translateZ(0);
     }
     header { position: static !important; }
     button, input, select, textarea { font-family: inherit; }
@@ -139,7 +155,9 @@
 
     /* Top Bar */
     .site-header {
-      background: var(--background);
+      background: rgba(251, 251, 253, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--outline-variant);
       padding-block: var(--space-md);
     }
@@ -253,19 +271,20 @@
     /* Bands */
     .band {
       padding-block: var(--space-2xl);
-      background: var(--background);
+      background: transparent;
     }
     .band.alt {
-      background: var(--surface-container-low);
+      background: rgba(245, 245, 247, 0.42);
     }
     .band.alt .tile {
-      background: var(--background);
+      background: rgba(255, 255, 255, 0.82);
     }
 
     /* Headline Stack */
     .headline-stack {
       text-align: center;
       padding-block: var(--space-lg) var(--space-xl);
+      text-shadow: 0 1px 14px rgba(255, 255, 255, 0.92);
     }
     .headline-stack.hero-stack {
       padding-block: var(--space-2xl) var(--space-xl);
@@ -301,7 +320,8 @@
       color: var(--on-surface);
     }
     .headline-stack .lede {
-      color: var(--on-surface-variant);
+      color: #3a3a3c;
+      font-weight: 500;
       font-size: var(--subhead-size);
       line-height: 1.45;
       max-width: 52ch;
@@ -318,10 +338,13 @@
 
     /* Tiles */
     .tile {
-      background: var(--surface-container-low);
+      background: rgba(255, 255, 255, 0.80);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       border-radius: var(--rounded-lg);
       padding: var(--space-xl) var(--space-lg);
-      border: 0;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
       transition: box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
     }
     .tile.interactive:hover {
@@ -486,9 +509,9 @@
       min-height: 44px;
       padding: var(--space-xs) var(--space-md);
       border-radius: var(--rounded);
-      background: var(--surface-container-low);
-      color: var(--on-surface-variant);
-      border: 0;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--on-surface);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
@@ -689,7 +712,10 @@
     .table-wrap {
       width: 100%;
       overflow-x: auto;
-      background: var(--surface-container-low);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
       border-radius: var(--rounded-lg);
       padding: var(--space-md) var(--space-lg);
     }
@@ -731,7 +757,9 @@
 
     /* Footer */
     .site-footer {
-      background: var(--surface-container-low);
+      background: rgba(245, 245, 247, 0.76);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       padding-block: var(--space-2xl) var(--space-3xl);
       border-top: 1px solid var(--outline-variant);
     }
