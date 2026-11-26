@@ -1072,9 +1072,6 @@
         <a href="#explorador" class="nav-link">Catálogo penal</a>
         <a href="#sistema-oral" class="nav-link">Sistema oral</a>
         <a href="#reformas" class="nav-link">Reformas</a>
-        <button type="button" class="btn-primary" onclick="openChatWidget()">
-          Abrir compañero legal
-        </button>
       </nav>
     </div>
   </header>
@@ -1087,12 +1084,10 @@
           <span class="eyebrow">Código Penal para el Estado de Querétaro · Edición 2026</span>
           <h1>Consulta penal clara, directa y fundamentada.</h1>
           <p class="lede">
-            Explora artículos, penas, reformas recientes y criterios del sistema penal acusatorio y oral en Querétaro. Resuelve tus dudas o plantea casos prácticos con tu compañero legal interactivo.
+            Explora artículos, penas, reformas recientes y criterios del sistema penal acusatorio y oral en Querétaro. Resuelve tus dudas o plantea casos prácticos usando el botón flotante en la esquina inferior derecha.
           </p>
           <div class="action-row">
-            <button type="button" class="btn-primary" onclick="openChatWidget()">
-              Consultar al compañero legal
-            </button>
+            <a href="#explorador" class="btn-primary">Explorar catálogo penal</a>
             <a href="#guia-uso" class="link-more">Ver cómo usar la plataforma</a>
           </div>
         </div>
@@ -1150,27 +1145,6 @@
               El asistente entiende el contexto de tu conversación: puedes preguntar <em>«¿y si fue sin querer?»</em>, <em>«¿cuánto sería en pesos?»</em> o <em>«¿qué pasa si me amenazan?»</em> y te responderá con criterio jurídico.
             </p>
           </article>
-        </div>
-
-        <div class="tile prompt-strip-tile reveal">
-          <p class="prompt-strip-title">Prueba una consulta o caso práctico en el compañero legal</p>
-          <div class="chip-row">
-            <button type="button" class="chip" onclick="askPresetQuestion(`¿Qué pena establece el artículo 126 Bis por feminicidio y cuándo hay razones de género?`)">
-              Pena por feminicidio (Art. 126 Bis)
-            </button>
-            <button type="button" class="chip" onclick="askPresetQuestion(`Asaltaron mi negocio en Querétaro, ¿qué pena les corresponde y cómo pido reparación del daño?`)">
-              Caso: Robo en comercio (Art. 183 Quáter)
-            </button>
-            <button type="button" class="chip" onclick="askPresetQuestion(`¿Cómo se valoran los testigos de oídas en el sistema oral según la SCJN?`)">
-              Testigos de oídas (ADR 1630/2023)
-            </button>
-            <button type="button" class="chip" onclick="askPresetQuestion(`¿Qué pasa si en un accidente de tránsito lesiono a alguien sin intención?`)">
-              Caso: Accidente culposo (Art. 75)
-            </button>
-            <button type="button" class="chip" onclick="askPresetQuestion(`¿Qué reformas hubo entre 2022 y 2026 en el Código Penal de Querétaro?`)">
-              Reformas recientes 2022–2026
-            </button>
-          </div>
         </div>
       </div>
     </section>
@@ -2035,6 +2009,39 @@
           `¿Cómo se castiga la violencia en estadios y espectáculos (Art. 134 Bis)?`,
           `¿Qué pasa si las lesiones fueron en legítima defensa (Art. 26)?`
         ]
+      },
+      {
+        keys: [`denuncia`, `denunciar`, `querella`, `fiscalia`, `ministerio publico`, `carpeta de investigacion`, `donde denuncio`, `levantar denuncia`, `abogado`, `defensor`],
+        badge: `Orientación Procesal · Denuncia y Defensa en Querétaro`,
+        title: `Cómo denunciar o ejercer tu defensa ante la Fiscalía de Querétaro`,
+        intro: `En el sistema penal acusatorio de Querétaro, el procedimiento inicia con la **denuncia** (cualquier persona puede presentarla en delitos que se persiguen de oficio) o la **querella** (a petición de la víctima u ofendido):`,
+        bullets: [
+          `**Si eres víctima u ofendido:** Al acudir a la Fiscalía General del Estado de Querétaro tienes derecho a un **asesor jurídico gratuito**, a que se dicten de inmediato **medidas de protección y auxilio (Art. 217 Quáter)** y a que el fiscal exija **de oficio la reparación integral del daño (Art. 35)**.`,
+          `**Si eres persona imputada o investigada:** Desde el primer momento tienes derecho a guardar silencio, a designar un **defensor particular titulado** (o un defensor público penal), a conocer los registros de la carpeta de investigación antes de la audiencia inicial y a que se investiguen **de oficio las causas que excluyen el delito (Art. 26)**.`
+        ],
+        criterio: `Criterio práctico: Lleva siempre identificación oficial y cualquier dato de prueba inicial (mensajes, videos, facturas, testigos o certificados médicos). En caso de emergencia activa o flagrancia, llama primero al 911 para que el primer respondiente asegure el lugar.`,
+        followUps: [
+          `¿Qué diferencia hay entre dato de prueba y prueba en la audiencia inicial?`,
+          `¿Qué pasa si quien me amenaza quebranta una medida de protección (Art. 303)?`,
+          `¿Cómo funcionan las causas excluyentes del delito (Art. 26)?`
+        ]
+      },
+      {
+        keys: [`daños`, `dano en propiedad`, `rompio`, `chocaron`, `cristalazo`, `allanamiento`, `metieron a mi casa`, `invadieron`, `despojo`, `terreno`],
+        badge: `Orientación Patrimonial · Daños, Allanamiento y Despojo`,
+        title: `Afectaciones a bienes inmuebles, domicilio y propiedad`,
+        intro: `Cuando una conducta afecta tu vehículo, casa o inmueble sin que necesariamente exista apoderamiento de objetos muebles (robo), el Código Penal de Querétaro distingue tres figuras clave:`,
+        bullets: [
+          `**Daños:** Se configura cuando por cualquier medio se destruye o deteriora una cosa ajena o propia en perjuicio de tercero. Si ocurre de forma imprudencial (como un choque vial sin lesionados graves), se rige por las reglas de delitos culposos (**Art. 75**) y suele resolverse mediante acuerdo reparatorio.`,
+          `**Allanamiento de domicilio:** Se actualiza cuando alguien se introduce sin permiso, furtivamente o con engaño/violencia a un departamento, vivienda o dependencia de casa habitada.`,
+          `**Despojo:** Ocurre cuando de propia autoridad y haciendo uso de violencia, engaño o furtividad se ocupa un inmueble ajeno o se impide materialmente el disfrute de un derecho real.`
+        ],
+        criterio: `Criterio práctico: Si el daño se causó mediante incendio, explosión o inundación generando peligro común para las personas o bienes vecinos, además de los daños patrimoniales se configura el delito de peligro de devastación del **artículo 218** (1 a 5 años de prisión).`,
+        followUps: [
+          `¿Qué penas aplican si el daño fue culposo o por accidente (Art. 75)?`,
+          `¿Qué sanción tiene el robo en local comercial o bodega (Art. 183 Quáter)?`,
+          `¿Cómo exige la Fiscalía la reparación del daño (Art. 35)?`
+        ]
       }
     ];
 
@@ -2048,19 +2055,8 @@
       oralStage: 0,
       chatOpen: false,
       lastTopicId: null,
+      greetingCount: 0,
       messages: []
-    };
-
-    const INITIAL_BOT_MESSAGE = {
-      role: `bot`,
-      badge: `Asistente Jurídico Activo`,
-      text: `¡Hola! Soy tu compañero legal especializado en el Código Penal para el Estado de Querétaro (actualizado a 2026) y en el sistema penal acusatorio y oral. Puedes preguntarme por un artículo, un delito o contarme un caso práctico con tus propias palabras (por ejemplo: «asaltaron mi tienda», «¿qué pasa en un accidente sin intención?» o «¿cómo funcionan los testigos de oídas?»).`,
-      suggestions: [
-        `Pena por feminicidio (Art. 126 Bis)`,
-        `Asaltaron mi negocio, ¿qué procede?`,
-        `Testigos de oídas (ADR 1630/2023)`,
-        `Reformas 2025–2026 en Querétaro`
-      ]
     };
 
     // Persistence helper (supports both host API and localStorage for GitHub Pages)
@@ -2074,7 +2070,7 @@
         lastTopicId: appState.lastTopicId
       };
       try {
-        localStorage.setItem(`companero_legal_qro_state_v2`, JSON.stringify(payload));
+        localStorage.setItem(`companero_legal_qro_state_v3`, JSON.stringify(payload));
       } catch (e) {}
       try {
         if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
@@ -2131,10 +2127,10 @@
           <div class="empty-state" style="grid-column: 1 / -1;">
             <h3>Sin coincidencias directas en las tarjetas</h3>
             <p style="margin: var(--space-sm) auto var(--space-md); max-width: 48ch; color: var(--on-surface-variant);">
-              No encontramos tarjetas con «${escapeHtml(appState.searchQuery)}», pero puedes consultarlo directamente con el compañero legal para recibir orientación con criterio jurídico.
+              No encontramos tarjetas con «${escapeHtml(appState.searchQuery)}». Limpia el filtro de búsqueda o consúltalo en el botón flotante del compañero legal.
             </p>
-            <button type="button" class="btn-primary" onclick="askPresetQuestion(appState.searchQuery || '¿Qué temas cubre este asistente?')">
-              Consultar «${escapeHtml(appState.searchQuery)}» en el chat
+            <button type="button" class="btn-secondary" onclick="resetExplorerFilters()">
+              Mostrar todos los artículos
             </button>
           </div>
         `;
@@ -2164,11 +2160,6 @@
             </div>
             <div>
               <div class="penalty-box">${escapeHtml(item.penalty)}</div>
-              <div class="card-actions">
-                <button type="button" class="link-more" onclick="askPresetQuestion(getPromptById('${item.id}'))">
-                  Consultar al asistente
-                </button>
-              </div>
             </div>
           </article>
         `;
@@ -2359,11 +2350,6 @@
           <ul class="stage-list">
             ${s.bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join(``)}
           </ul>
-          <div style="margin-top: var(--space-lg);">
-            <button type="button" class="btn-primary" onclick="askPresetQuestion(getOralPrompt(${appState.oralStage}))">
-              Profundizar con el compañero legal
-            </button>
-          </div>
         </div>
         <div class="stage-callout">
           <div class="field-label" style="color: var(--primary); margin-bottom: var(--space-xs);">Punto clave</div>
@@ -2372,6 +2358,18 @@
         </div>
       `;
     }
+
+    const INITIAL_BOT_MESSAGE = {
+      role: `bot`,
+      badge: `Compañero Legal · Querétaro`,
+      text: `¡Hola! Soy tu compañero legal del Código Penal de Querétaro. ¿En qué te puedo ayudar hoy? Puedes preguntarme por un delito, un artículo o contarme un caso con tus propias palabras.`,
+      suggestions: [
+        `Pena por feminicidio (Art. 126 Bis)`,
+        `Asaltaron mi negocio, ¿qué procede?`,
+        `Testigos de oídas (ADR 1630/2023)`,
+        `Reformas 2025–2026`
+      ]
+    };
 
     function getOralPrompt(idx) {
       const s = ORAL_STAGES[idx];
@@ -2395,33 +2393,61 @@
       const q = normalizeText(rawQuery);
       const words = q.split(` `).filter(Boolean);
 
-      // 1. Detectar saludos, agradecimientos o conversación social natural
-      const greetings = [`hola`, `buenos dias`, `buenas tardes`, `buenas noches`, `que tal`, `hey`, `saludos`];
-      const thanks = [`gracias`, `muchas gracias`, `te agradezco`, `excelente`, `perfecto`, `muy claro`, `entendido`, `genial`];
-      const identity = [`quien eres`, `que eres`, `como funcionas`, `que puedes hacer`, `ayuda`, `para que sirves`, `temas`];
+      // 1. Detectar saludos, preguntas de cortesía, agradecimientos o conversación social natural
+      const greetings = [`hola`, `buenos dias`, `buenas tardes`, `buenas noches`, `que tal`, `hey`, `saludos`, `que onda`, `buen dia`];
+      const howAreYou = [`como estas`, `como andas`, `todo bien`, `que cuentas`, `como te va`];
+      const thanks = [`gracias`, `muchas gracias`, `te agradezco`, `excelente`, `perfecto`, `muy claro`, `entendido`, `genial`, `ok gracias`, `vale gracias`];
+      const farewells = [`adios`, `hasta luego`, `nos vemos`, `bye`, `chao`];
+      const identity = [`quien eres`, `que eres`, `como funcionas`, `que puedes hacer`, `ayuda`, `para que sirves`, `temas`, `que sabes hacer`];
+
+      if (words.length <= 6 && howAreYou.some((h) => q.includes(h))) {
+        return {
+          badge: `En línea`,
+          text: `¡Todo muy bien, gracias por preguntar! Aquí listo para ayudarte a analizar cualquier duda o caso sobre el **Código Penal de Querétaro** o las audiencias del **sistema oral**. ¿Qué situación o delito te gustaría revisar?`,
+          suggestions: [
+            `¿Qué pena tiene el robo en comercio?`,
+            `¿Cuándo se acredita el feminicidio (Art. 126 Bis)?`,
+            `¿Qué pasa si lesiono a alguien por accidente?`
+          ]
+        };
+      }
 
       if (words.length <= 5 && greetings.some((g) => q === g || q.startsWith(g + ` `))) {
+        appState.greetingCount = (appState.greetingCount || 0) + 1;
+        if (appState.greetingCount === 1) {
+          return {
+            badge: `Compañero Legal`,
+            text: `¡Hola! Qué gusto saludarte. Cuéntame, ¿tienes alguna duda sobre un artículo del **Código Penal de Querétaro**, quieres calcular una pena o prefieres plantearme un caso práctico con tus propias palabras?`,
+            suggestions: [
+              `Asaltaron mi negocio, ¿qué procede?`,
+              `¿Qué pena tiene el feminicidio (Art. 126 Bis)?`,
+              `¿Cómo funcionan los testigos de oídas?`,
+              `¿Qué reformas hubo en 2025 y 2026?`
+            ]
+          };
+        }
         return {
-          badge: `Compañero Legal · En línea`,
-          text: `¡Hola! Qué gusto saludarte. Estoy listo para orientarte sobre el **Código Penal para el Estado de Querétaro** (incluyendo sus reformas hasta 2026) y criterios del **sistema penal acusatorio y oral**. ¿Tienes duda sobre algún delito en particular, el cálculo de una pena o quieres plantearme un caso práctico?`,
-          bullets: [
-            `**Delitos frecuentes:** Feminicidio (Art. 126 Bis), Homicidio (Art. 125), Robo en comercio o bienes públicos (Arts. 183 Quáter y Quinquies), Maltrato animal (Art. 246-D), Violencia en estadios (Art. 134 Bis), Corrupción y Lavado (Arts. 246-H y 273).`,
-            `**Reglas y defensas:** Legítima defensa y excluyentes (Art. 26), tentativa (Art. 74), accidentes culposos (Art. 75), multas en UMA (Art. 34) y medidas de protección a víctimas (Art. 217 Quáter).`
-          ],
-          criterio: `Consejo: Puedes preguntarme de forma directa («¿qué dice el Art. 126 Bis?») o platicarme una situación («me robaron en mi local», «tuve un accidente sin intención»).`,
+          badge: `Compañero Legal`,
+          text: `¡Hola de nuevo! Aquí te escucho. Dime con confianza qué delito, artículo o situación legal de Querétaro quieres que revisemos (por ejemplo: *«me chocaron y hubo lesionados»*, *«¿qué es la legítima defensa?»* o *«¿cómo se calculan las multas en UMA?»*).`,
           suggestions: [
-            `¿Qué pena tiene el feminicidio (Art. 126 Bis)?`,
-            `Asaltaron mi negocio, ¿qué procede?`,
-            `¿Cómo funcionan los testigos de oídas?`,
-            `¿Qué reformas hubo en 2025 y 2026?`
+            `¿Cómo opera la legítima defensa (Art. 26)?`,
+            `¿Cuál es la diferencia entre fraude y deuda civil?`,
+            `¿Cómo se calculan las multas en UMA?`
           ]
+        };
+      }
+
+      if (words.length <= 5 && farewells.some((f) => q === f || q.startsWith(f + ` `))) {
+        return {
+          badge: `Hasta pronto`,
+          text: `¡Hasta luego! Si más adelante te surge otra duda sobre el Código Penal de Querétaro o el proceso oral, aquí estaré disponible en el botón flotante.`
         };
       }
 
       if (words.length <= 6 && thanks.some((t) => q.includes(t))) {
         return {
           badge: `Compañero Legal · Querétaro`,
-          text: `¡Con todo gusto! Me alegra que la orientación te sea útil. Recuerda que si quieres explorar algún otro supuesto (por ejemplo, cómo cambiaría la pena si fuera en tentativa o imprudencial, o cómo presentar la denuncia en Querétaro), aquí sigo para ayudarte.`,
+          text: `¡Con todo gusto! Si quieres revisar algún otro detalle del caso —como qué pruebas reunir, cómo baja la pena si fue sin intención o cómo pedir la reparación del daño—, solo escríbeme.`,
           suggestions: [
             `¿Cómo se calcula la tentativa o el delito culposo?`,
             `¿Cómo exige la Fiscalía la reparación del daño (Art. 35)?`,
@@ -2591,9 +2617,9 @@
       if (!container) return;
 
       const list = appState.messages.length > 0 ? appState.messages : [INITIAL_BOT_MESSAGE];
-      let html = list.map((m) => {
+      let html = list.map((m, idx) => {
         if (m.role === `user`) {
-          return `<div class="msg user">${escapeHtml(m.text)}</div>`;
+          return `<div class="msg user" data-msg-idx="${idx}">${escapeHtml(m.text)}</div>`;
         }
         const badgeHtml = m.badge ? `<span class="msg-badge">${escapeHtml(m.badge)}</span>` : ``;
         const introHtml = `<p class="msg-intro">${formatRichText(m.text)}</p>`;
@@ -2606,19 +2632,28 @@
         const suggestionsHtml = Array.isArray(m.suggestions) && m.suggestions.length > 0
           ? `<div class="msg-suggestions">${m.suggestions.map((s) => `<button type="button" class="msg-suggestion-btn" onclick="submitQueryText(this.textContent)">${escapeHtml(s)}</button>`).join(``)}</div>`
           : ``;
-        return `<div class="msg bot">${badgeHtml}${introHtml}${bulletsHtml}${criterioHtml}${suggestionsHtml}</div>`;
+        return `<div class="msg bot" data-msg-idx="${idx}">${badgeHtml}${introHtml}${bulletsHtml}${criterioHtml}${suggestionsHtml}</div>`;
       }).join(``);
 
       if (isTyping) {
         html += `
-          <div class="msg bot" aria-label="El asistente está redactando su respuesta">
+          <div class="msg bot" id="typing-indicator" aria-label="El asistente está redactando su respuesta">
             <div class="typing-dots"><span></span><span></span><span></span></div>
           </div>
         `;
       }
 
       container.innerHTML = html;
-      container.scrollTop = container.scrollHeight;
+      if (isTyping) {
+        container.scrollTop = container.scrollHeight;
+      } else {
+        const lastBot = container.querySelector(`.msg.bot[data-msg-idx="${list.length - 1}"]`);
+        if (lastBot && list.length > 1) {
+          lastBot.scrollIntoView({ behavior: `smooth`, block: `nearest` });
+        } else {
+          container.scrollTop = container.scrollHeight;
+        }
+      }
     }
 
     function openChatWidget() {
@@ -2736,7 +2771,7 @@
     // Initialize App
     async function initApp() {
       try {
-        const localRaw = localStorage.getItem(`companero_legal_qro_state_v2`);
+        const localRaw = localStorage.getItem(`companero_legal_qro_state_v3`);
         if (localRaw) {
           const parsed = JSON.parse(localRaw);
           if (parsed && typeof parsed === `object`) {
