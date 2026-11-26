@@ -2666,8 +2666,8 @@
         const primary = scoredNodes[0].node;
         appState.lastTopicId = primary.id;
 
-        // Si la consulta combina dos temas con puntaje alto (ej. "robo en tentativa" o "feminicidio y testigos de oídas"), integramos ambos con criterio
-        if (scoredNodes.length > 1 && scoredNodes[1].score >= 8 && scoredNodes[1].node.id !== primary.id) {
+        // Si la consulta combina dos temas (ej. "robo en intento/tentativa" o "feminicidio y testigos de oídas"), integramos ambos con criterio
+        if (scoredNodes.length > 1 && scoredNodes[1].score >= 6 && scoredNodes[1].node.id !== primary.id) {
           const secondary = scoredNodes[1].node;
           const combinedBullets = [
             ...primary.bullets.slice(0, 2),
@@ -2677,7 +2677,7 @@
             badge: `${primary.badge.split(`·`)[0].trim()} + ${secondary.badge.split(`·`)[0].trim()}`,
             text: `Tu consulta involucra dos aspectos conectados en el Derecho Penal de Querétaro (**${primary.title}** y **${secondary.title}**). Aquí tienes el análisis integrado:`,
             bullets: combinedBullets,
-            criterio: `${primary.criterio}`,
+            criterio: `${primary.criterio} ${secondary.criterio || ``}`.trim(),
             suggestions: primary.followUps
           };
         }
